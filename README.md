@@ -3,11 +3,12 @@ psyhxsm
 
 ####"Psycho-history Simulator"
 
-Senior project by Timothy Honeywell, an Interactive Multimedia student at The College of New Jersey.
+In-progress undergraduate thesis project.
 
 An artwork inspired by an amalgamation of ideas:
 
 - Isaac Asimov's "psychohistory"
 - Conway's "Game of Life"
-- chaos theory
-- utopias
+- Evolutionary algorithms
+- Emergence
+- Self-organization
