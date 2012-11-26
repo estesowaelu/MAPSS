@@ -21,8 +21,8 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-#define APP_WIDTH		1280
-#define APP_HEIGHT		720
+#define APP_WIDTH		1440
+#define APP_HEIGHT		900
 #define ROOM_WIDTH		350
 #define ROOM_HEIGHT		200
 #define ROOM_DEPTH		150
@@ -123,7 +123,7 @@ public:
 void FlockingApp::prepareSettings( Settings *settings )
 {
 	settings->setWindowSize( APP_WIDTH, APP_HEIGHT );
-//	settings->setBorderless();
+	settings->setBorderless();
 }
 
 void FlockingApp::setup()
@@ -201,6 +201,7 @@ void FlockingApp::initialize()
 	gl::disableAlphaBlending();
 	gl::disableDepthWrite();
 	gl::disableDepthRead();
+	app::setFullScreen();
 	
 	mFboDim				= FBO_DIM;
 	mFboSize			= Vec2f( mFboDim, mFboDim );

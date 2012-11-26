@@ -18,6 +18,8 @@ public:
 	Particle(ci::Vec2f, int res);
 
 	void update(int color, bool ordered, const ci::Vec2i &mouseLoc);
+	void updateColor(int color, float tint);
+	void updateSize(float distToCursor, float hypotDCN);
 	void draw();
 
 	void boundFloat(float& i, bool colored);
