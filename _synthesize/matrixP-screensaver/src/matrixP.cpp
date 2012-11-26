@@ -5,10 +5,10 @@
 #include "cinder/CinderMath.h"
 
 #define RESOLUTION 15
-//#define WIDTH 640
-//#define HEIGHT 761
-#define WIDTH 1440
-#define HEIGHT 900
+#define WIDTH 640
+#define HEIGHT 761
+//#define WIDTH 1440
+//#define HEIGHT 900
 
 using namespace ci;
 using namespace ci::app;
@@ -54,7 +54,7 @@ void matrixP::setup() {
 	mRenderAuto = FALSE;
 	framecounter = 0;
 	typecounter = 1;
-	app::setFullScreen();
+//	app::setFullScreen();
 }
 
 void matrixP::update() {
@@ -85,7 +85,7 @@ void matrixP::printStats() {
 	app::console() << "===========================" << std::endl;
 	if(mRenderAuto) {
 		app::console() << "AutoRender ON" << std::endl;
-		app::console() << "Frame " << framecounter << "/18000000" << std::endl;
+		app::console() << "Frame " << framecounter << "/18000" << std::endl;
 		app::console() << "Type " << typecounter << "/3" << std::endl;
 		app::console() << "GhostMouse: " << mGhostMouse << std::endl;
 	}
