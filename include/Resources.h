@@ -25,3 +25,5 @@
 #define RES_P_VBOPOS_FRAG	CINDER_RESOURCE( ../resources/, P_VboPos.frag,		172, GLSL )
 #define RES_GLOW_FRAG		CINDER_RESOURCE( ../resources/, glow.frag,			173, GLSL )
 #define RES_NEBULA_FRAG		CINDER_RESOURCE( ../resources/, nebula.frag,		174, GLSL )
+#define RES_SPHERE_FRAG		CINDER_RESOURCE( ../resources/, sphere.frag,		175, GLSL )
+#define RES_SPHERE_VERT		CINDER_RESOURCE( ../resources/, sphere.vert,		176, GLSL )
