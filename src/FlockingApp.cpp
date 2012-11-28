@@ -14,8 +14,8 @@
 #include "SpringCam.h"
 #include "Room.h"
 #include "Controller.h"
-
 #include "Lantern.h"
+#include "CubeMap.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -60,6 +60,7 @@ public:
 	void				drawGlows();
 	void				drawNebulas();
 	virtual void		draw();
+	void				drawSphere();
 	
 	// CAMERA
 	SpringCam			mSpringCam;
@@ -69,6 +70,7 @@ public:
 	gl::Texture			mGlowTex;
 	gl::Texture			mNebulaTex;
 	gl::Texture			mIconTex;
+	CubeMap				mCubeMap;
 	
 	// SHADERS
 	gl::GlslProg		mVelocityShader;
@@ -81,6 +83,7 @@ public:
 	gl::GlslProg		mP_Shader;
 	gl::GlslProg		mGlowShader;
 	gl::GlslProg		mNebulaShader;
+	gl::GlslProg		mSphereShader;
 	
 	// CONTROLLER
 	Controller			mController;
@@ -152,6 +155,14 @@ void FlockingApp::setup()
 	mGlowTex			= gl::Texture( loadImage( loadResource( RES_GLOW_PNG ) ) );
 	mNebulaTex			= gl::Texture( loadImage( loadResource( RES_NEBULA_PNG ) ) );
 	mIconTex			= gl::Texture( loadImage( loadResource( "iconFlocking.png" ) ), mipFmt );
+	mCubeMap			= CubeMap( GLsizei(512), GLsizei(512),
+								  Surface8u( loadImage( loadResource( RES_CUBE1_ID ) ) ),
+								  Surface8u( loadImage( loadResource( RES_CUBE2_ID ) ) ),
+								  Surface8u( loadImage( loadResource( RES_CUBE3_ID ) ) ),
+								  Surface8u( loadImage( loadResource( RES_CUBE4_ID ) ) ),
+								  Surface8u( loadImage( loadResource( RES_CUBE5_ID ) ) ),
+								  Surface8u( loadImage( loadResource( RES_CUBE6_ID ) ) )
+								  );
 	
 	// LOAD SHADERS
 	try {
@@ -165,6 +176,8 @@ void FlockingApp::setup()
 		mP_Shader			= gl::GlslProg( loadResource( RES_P_VBOPOS_VERT ),	loadResource( RES_P_VBOPOS_FRAG ) );
 		mGlowShader			= gl::GlslProg( loadResource( RES_PASSTHRU_VERT ),	loadResource( RES_GLOW_FRAG ) );
 		mNebulaShader		= gl::GlslProg( loadResource( RES_PASSTHRU_VERT ),	loadResource( RES_NEBULA_FRAG ) );
+		mSphereShader		= gl::GlslProg( loadResource( RES_SPHERE_VERT ), loadResource( RES_SPHERE_FRAG ) );
+
 	} catch( gl::GlslProgCompileExc e ) {
 		std::cout << e.what() << std::endl;
 		quit();
@@ -658,6 +671,7 @@ void FlockingApp::keyDown( KeyEvent event )
 		case ' ': mRoom.togglePower();			break;
 		case 'g': mRoom.toggleGravity();		break;
 		case 's': mSaveFrames = !mSaveFrames;	break;
+		case 'l': mController.addLantern( mRoom.getRandCeilingPos() ); break;
 		default:								break;
 	}
 	
@@ -667,12 +681,6 @@ void FlockingApp::keyDown( KeyEvent event )
 		case KeyEvent::KEY_LEFT:	mSpringCam.setEye( mRoom.getLeftWallPos() );		break;
 		case KeyEvent::KEY_RIGHT:	mSpringCam.resetEye();								break;
 		default: break;
-	}
-
-	if( event.getChar() == ' ' ){
-		mRoom.togglePower();
-	} else if( event.getChar() == 'l' ){
-		mController.addLantern( mRoom.getRandCeilingPos() );
 	}
 }
 
@@ -886,6 +894,8 @@ void FlockingApp::draw()
 	gl::enableDepthRead();
 	gl::enableDepthWrite();
 	
+	drawSphere();
+	
 	// DRAW PARTICLES
 	mPositionFbos[mPrevFbo].bindTexture( 0 );
 	mPositionFbos[mThisFbo].bindTexture( 1 );
@@ -1089,6 +1099,20 @@ void FlockingApp::drawIntoLanternsFbo()
 	mLanternsFbo.unbindFramebuffer();
 }
 
-
+void FlockingApp::drawSphere()
+{
+	gl::color( ColorA( 1, 1, 1, 1 ) );
+	gl::disable( GL_TEXTURE_2D );
+	mCubeMap.bind();
+	mSphereShader.bind();
+	mSphereShader.uniform( "cubeMap", 0 );
+	mSphereShader.uniform( "radius", 70.0f );
+	mSphereShader.uniform( "mvpMatrix", mSpringCam.mMvpMatrix );
+	mSphereShader.uniform( "eyePos", mSpringCam.getEye() );
+	mSphereShader.uniform( "power", mRoom.getPower() );
+	mSphereShader.uniform( "roomDim", mRoom.getDims() );
+	gl::drawSphere( Vec3f::zero(), 1.0f, 128 );
+	mSphereShader.unbind();
+}
 
 CINDER_APP_BASIC( FlockingApp, RendererGl )
