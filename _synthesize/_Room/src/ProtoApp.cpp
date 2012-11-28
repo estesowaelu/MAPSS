@@ -241,10 +241,10 @@ void ProtoApp::draw()
 	drawInfoPanel();
 	
 	// SAVE FRAMES
-	if( mSaveFrames && mNumSavedFrames < 5000 ){
-		writeImage( getHomeDirectory() + "Room/" + toString( mNumSavedFrames ) + ".png", copyWindowSurface() );
-		mNumSavedFrames ++;
-	}
+//	if( mSaveFrames && mNumSavedFrames < 5000 ){
+//		writeImage(getHomeDirectory()+"Room/"+toString(mNumSavedFrames)+".png", copyWindowSurface() );
+//		mNumSavedFrames ++;
+//	}
 
 	// DRAW PARAMS WINDOW
 //	if( mShowParams ){

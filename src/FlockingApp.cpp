@@ -654,6 +654,21 @@ void FlockingApp::mouseWheel( MouseEvent event )
 
 void FlockingApp::keyDown( KeyEvent event )
 {
+	switch( event.getChar() ){
+		case ' ': mRoom.togglePower();			break;
+		case 'g': mRoom.toggleGravity();		break;
+		case 's': mSaveFrames = !mSaveFrames;	break;
+		default:								break;
+	}
+	
+	switch( event.getCode() ){
+		case KeyEvent::KEY_UP:		mSpringCam.setEye( mRoom.getCornerCeilingPos() );	break;
+		case KeyEvent::KEY_DOWN:	mSpringCam.setEye( mRoom.getCornerFloorPos() );		break;
+		case KeyEvent::KEY_LEFT:	mSpringCam.setEye( mRoom.getLeftWallPos() );		break;
+		case KeyEvent::KEY_RIGHT:	mSpringCam.resetEye();								break;
+		default: break;
+	}
+
 	if( event.getChar() == ' ' ){
 		mRoom.togglePower();
 	} else if( event.getChar() == 'l' ){
