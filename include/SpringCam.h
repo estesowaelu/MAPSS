@@ -44,6 +44,8 @@ class SpringCam {
 			mAcc = ci::Vec3f::zero();
 		}
 
+		void setPos( const ci::Vec3f &v ){ mRestPos = v; }
+
 		ci::Vec3f mRestPos;
 		ci::Vec3f mPos, mVel, mAcc;
 	};
@@ -57,6 +59,9 @@ class SpringCam {
 	void dragCam( const ci::Vec2f &posOffset, float distFromCenter );
 	void draw();
 	ci::CameraPersp getCam(){ return mCam; }
+	ci::Vec3f getEye(){ return mCam.getEyePoint(); }
+	void setEye( const ci::Vec3f &eye );
+	void resetEye();
 	
 	ci::CameraPersp		mCam;
 	float				mCamDist;
