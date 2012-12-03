@@ -21,11 +21,11 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-#define APP_WIDTH		720
-#define APP_HEIGHT		450
-#define ROOM_WIDTH		360
-#define ROOM_HEIGHT		225
-#define ROOM_DEPTH		225
+#define APP_WIDTH		1280
+#define APP_HEIGHT		720
+#define ROOM_WIDTH		300
+#define ROOM_HEIGHT		200
+#define ROOM_DEPTH		300
 #define ROOM_FBO_RES	2
 #define FBO_DIM			50//167
 #define P_FBO_DIM		5
@@ -123,7 +123,7 @@ public:
 void FlockingApp::prepareSettings( Settings *settings )
 {
 	settings->setWindowSize( APP_WIDTH, APP_HEIGHT );
-	settings->setBorderless();
+//	settings->setBorderless();
 }
 
 void FlockingApp::setup()
@@ -658,6 +658,7 @@ void FlockingApp::keyDown( KeyEvent event )
 		case ' ': mRoom.togglePower();			break;
 		case 'g': mRoom.toggleGravity();		break;
 		case 's': mSaveFrames = !mSaveFrames;	break;
+		case 'l': mController.addLantern( mRoom.getRandCeilingPos() );	break;
 		default:								break;
 	}
 	
@@ -669,11 +670,6 @@ void FlockingApp::keyDown( KeyEvent event )
 		default: break;
 	}
 
-	if( event.getChar() == ' ' ){
-		mRoom.togglePower();
-	} else if( event.getChar() == 'l' ){
-		mController.addLantern( mRoom.getRandCeilingPos() );
-	}
 }
 
 void FlockingApp::update()
