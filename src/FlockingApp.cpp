@@ -23,9 +23,9 @@ using namespace std;
 
 #define APP_WIDTH		1280
 #define APP_HEIGHT		720
-#define ROOM_WIDTH		300
+#define ROOM_WIDTH		350
 #define ROOM_HEIGHT		200
-#define ROOM_DEPTH		300
+#define ROOM_DEPTH		150
 #define ROOM_FBO_RES	2
 #define FBO_DIM			50//167
 #define P_FBO_DIM		5
@@ -201,7 +201,7 @@ void FlockingApp::initialize()
 	gl::disableAlphaBlending();
 	gl::disableDepthWrite();
 	gl::disableDepthRead();
-//	app::setFullScreen();
+	app::setFullScreen();
 	
 	mFboDim				= FBO_DIM;
 	mFboSize			= Vec2f( mFboDim, mFboDim );
