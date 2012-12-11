@@ -16,5 +16,4 @@ An artwork inspired by an amalgamation of ideas:
 * * *
 
 - discretely deformable, paintable dynamic terrain
-- unique, intelligent, evolving agents behaviors
-- camera control
+- unique, intelligent, evolving agents
