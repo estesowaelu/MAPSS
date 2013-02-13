@@ -1,7 +1,8 @@
-psyhxsm
+MAPSS
 =======
 
-####"Psycho-history Simulator"
+##Multi-Agent Psychological Sandbox Simulator
+###previously PSYHXSM (Psycho-History Simulator)
 
 In-progress undergraduate thesis project.
 
