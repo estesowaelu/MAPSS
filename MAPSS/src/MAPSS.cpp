@@ -169,11 +169,14 @@ void MAPSS::processGestures() {
 		if (gestures[i].type() == Leap::Gesture::TYPE_SCREEN_TAP) {
 			Leap::ScreenTapGesture tap = gestures[i];
 			ci::Vec3f tapLoc = normalizeCoords(tap.position());
+            console() << tap.position() << "\n";
+            console() << tapLoc << "\n";
 			mController.addLantern(tapLoc);
 //			field.Repel(tap.id(), ci::Vec2f(tapLoc.x, tapLoc.y), 3.0);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_KEY_TAP) {
 			Leap::KeyTapGesture tap = gestures[i];
 			ci::Vec3f tapLoc = normalizeCoords(tap.position());
+			mController.addLantern(tapLoc);
 //			field.Repel(tap.id(), ci::Vec2f(tapLoc.x, tapLoc.y), -3.0);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_SWIPE) {
 			Leap::SwipeGesture swipe = gestures[i];
@@ -197,15 +200,18 @@ void MAPSS::processGestures() {
 }
 
 Vec3f MAPSS::normalizeCoords(const Leap::Vector& vec) {
-	static const float INTERACTION_CENTER_X = 0;
-	static const float INTERACTION_CENTER_Y = 200;
-	static const float INTERACTION_CENTER_Z = 0;
-	static const float INTERACTION_SIZE = 400;
+//	static const float INTERACTION_CENTER_X = 0;
+//	static const float INTERACTION_CENTER_Y = 200;
+//	static const float INTERACTION_CENTER_Z = 0;
+//	static const float INTERACTION_SIZE = 400;
 	
 	ci::Vec3f result;
-	result.x = (vec.x - INTERACTION_CENTER_X + (INTERACTION_SIZE/2)) / INTERACTION_SIZE;
-	result.y = 1.0f - (vec.y - INTERACTION_CENTER_Y + (INTERACTION_SIZE/2)) / INTERACTION_SIZE;
-	result.z = (vec.z - INTERACTION_CENTER_Z + (INTERACTION_SIZE/2)) / INTERACTION_SIZE;
+    result.x = -vec.x;
+    result.y = vec.y;
+    result.z = vec.z;
+//	result.x = (vec.x - INTERACTION_CENTER_X + (INTERACTION_SIZE/2)) / INTERACTION_SIZE;
+//	result.y = 1.0f - (vec.y - INTERACTION_CENTER_Y + (INTERACTION_SIZE/2)) / INTERACTION_SIZE;
+//	result.z = (vec.z - INTERACTION_CENTER_Z + (INTERACTION_SIZE/2)) / INTERACTION_SIZE;
 	return result;
 }
 
