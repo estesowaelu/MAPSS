@@ -35,7 +35,7 @@ using namespace std;
 #define ROOM_FBO_RES	2
 #define FBO_DIM			50//167
 #define P_FBO_DIM		5
-#define MAX_LANTERNS	5
+#define MAX_LANTERNS	16
 
 class MAPSSListener : public Leap::Listener {
 	
@@ -271,7 +271,7 @@ void MAPSS::setup()
 	gl::Fbo::Format roomFormat;
 	roomFormat.setColorInternalFormat( GL_RGB );
 	mRoomFbo			= gl::Fbo( APP_WIDTH/ROOM_FBO_RES, APP_HEIGHT/ROOM_FBO_RES, roomFormat );
-	bool isPowerOn		= false;
+	bool isPowerOn		= true;
 	bool isGravityOn	= true;
 	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn, isGravityOn );	
 	mRoom.init();
@@ -1013,7 +1013,7 @@ void MAPSS::draw()
 	mP_Shader.unbind();
 	
 	// DRAW LANTERN GLOWS
-	if( mRoom.isPowerOn() ){
+//	if( mRoom.isPowerOn() ){
 		gl::disableDepthWrite();
 		gl::enableAdditiveBlending();
 		float c =  mRoom.getPower();
@@ -1023,7 +1023,7 @@ void MAPSS::draw()
 		
 		drawGlows();
 		drawNebulas();
-	}
+//	}
 	
 	gl::disable( GL_TEXTURE_2D );
 	gl::enableDepthWrite();
