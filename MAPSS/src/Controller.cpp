@@ -54,9 +54,9 @@ void Controller::drawLanternGlows( const Vec3f &right, const Vec3f &up ) {
 	}
 }
 
-void Controller::addLantern( const Vec3f &pos ) {
+void Controller::addLantern( const Vec3f &pos, Color col ) {
 	if( mNumLanterns < mMaxLanterns ){
-		mLanterns.push_back( Lantern( pos ) );
+		mLanterns.push_back( Lantern( pos, col ) );
 	}
 }
 

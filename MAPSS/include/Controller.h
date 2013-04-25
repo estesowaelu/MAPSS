@@ -21,7 +21,7 @@ public:
 	void update();
 	void drawLanterns( ci::gl::GlslProg *shader );
 	void drawLanternGlows( const ci::Vec3f &right, const ci::Vec3f &up );
-	void addLantern( const ci::Vec3f &pos );
+	void addLantern( const ci::Vec3f &pos, ci::Color col );
 	Room					*mRoom;
 
 	int						mNumLanterns;

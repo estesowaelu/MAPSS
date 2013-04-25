@@ -168,36 +168,29 @@ void MAPSS::processGestures() {
 	
 	for (size_t i=0; i < numGestures; i++) {
 		if (gestures[i].type() == Leap::Gesture::TYPE_SCREEN_TAP) {
+            /////////// screen-taps should place yellow cubes //////////////
 			Leap::ScreenTapGesture tap = gestures[i];
-			ci::Vec3f tapLoc = normalizeCoords(tap.position());
-            console() << tap.position() << "\n";
-            console() << tapLoc << "\n";
-			mController.addLantern(tapLoc);
-//			field.Repel(tap.id(), ci::Vec2f(tapLoc.x, tapLoc.y), 3.0);
+			ci::Vec3f eLoc = normalizeCoords(tap.position());
+            console() << tap.position() << "\n"; console() << eLoc << "\n";
+            Color lcolor = Color( 255, 255, 0 );
+			mController.addLantern(eLoc, lcolor);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_KEY_TAP) {
+            /////////// key-taps should place red pyramids /////////////
 			Leap::KeyTapGesture tap = gestures[i];
-			ci::Vec3f tapLoc = normalizeCoords(tap.position());
-			mController.addLantern(tapLoc);
-//			field.Repel(tap.id(), ci::Vec2f(tapLoc.x, tapLoc.y), -3.0);
-		} else if (gestures[i].type() == Leap::Gesture::TYPE_SWIPE) {
-			Leap::SwipeGesture swipe = gestures[i];
-			Leap::Vector diff = 0.004f*(swipe.position() - swipe.startPosition());
-			ci::Vec3f curSwipe(diff.x, -diff.y, diff.z);
-//			field.Translate(swipe.id(), curSwipe);
+			ci::Vec3f eLoc = normalizeCoords(tap.position());
+            Color lcolor = Color( 255, 0, 0 );
+			mController.addLantern(eLoc, lcolor);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_CIRCLE) {
+            ///////// Circles should place blue spheres ///////////////
 			Leap::CircleGesture circle = gestures[i];
 			float progress = circle.progress();
 			if (progress >= 1.0f) {
-				ci::Vec3f center = normalizeCoords(circle.center());
-				ci::Vec3f normal(circle.normal().x, circle.normal().y, circle.normal().z);
-				double curAngle = 6.5;
-				if (normal.z < 0) {
-					curAngle *= -1;
-				}
-//				field.Rotate(circle.id(), ci::Vec2f(center.x, center.y), circle.radius()/250, curAngle);
+				ci::Vec3f eLoc = normalizeCoords(circle.center());
+                Color lcolor = Color( 0, 0, 255 );
+                mController.addLantern(eLoc, lcolor);
 			}
 		}
-	}
+    }
 }
 
 Vec3f MAPSS::normalizeCoords(const Leap::Vector& vec) {

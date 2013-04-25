@@ -13,14 +13,13 @@
 
 using namespace ci;
 
-Lantern::Lantern( const Vec3f &pos )
-{
+Lantern::Lantern( const Vec3f &pos, Color col ) {
 	mPos		= pos;
 	mRadius		= 0.0f;
 	mRadiusDest	= Rand::randFloat( 4.5f, 7.5f );
 	if( Rand::randFloat() < 0.1f ) mRadiusDest = Rand::randFloat( 13.0f, 25.0f );
 	
-	mColor		= Color( CM_HSV, Rand::randFloat( 0.0f, 0.1f ), 0.9f, 1.0f );
+    mColor      = col;
 	mIsDead		= false;
 	mIsDying	= false;
     deathTimer  = 1800;
