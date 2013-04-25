@@ -35,15 +35,15 @@ using namespace std;
 using namespace ci;
 using namespace ci::app;
 
-#define APP_WIDTH		1280
-#define APP_HEIGHT		720
+#define APP_WIDTH		1440
+#define APP_HEIGHT		900
 #define ROOM_WIDTH		350
 #define ROOM_HEIGHT		200
 #define ROOM_DEPTH		150
 #define ROOM_FBO_RES	2
 #define FBO_DIM			50//167
 #define P_FBO_DIM		5
-#define MAX_LANTERNS	16
+#define MAX_LANTERNS	32
 
 class MAPSSListener : public Leap::Listener {
 public:
@@ -260,7 +260,7 @@ void MAPSS::setup()
 	gl::Fbo::Format roomFormat;
 	roomFormat.setColorInternalFormat( GL_RGB );
 	mRoomFbo			= gl::Fbo( APP_WIDTH/ROOM_FBO_RES, APP_HEIGHT/ROOM_FBO_RES, roomFormat );
-	bool isPowerOn		= true;
+	bool isPowerOn		= false;
 //	bool isGravityOn	= true;
 //	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn, isGravityOn );
 	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn );
@@ -1047,15 +1047,6 @@ void MAPSS::draw()
 	}
 	
 	mThisFbo	= ( mThisFbo + 1 ) % 2;
-	
-	if( getElapsedFrames()%60 == 0 ){
-		console() << "FPS = " << getAverageFps() << std::endl;
-	}
-}
-
-}
-
-
 	mPrevFbo	= ( mThisFbo + 1 ) % 2;	
 }
 
