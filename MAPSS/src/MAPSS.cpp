@@ -29,12 +29,11 @@
 #include "Room.h"
 #include "Controller.h"
 #include "Lantern.h"
-
 #include "Resources.h"
 
+using namespace std;
 using namespace ci;
 using namespace ci::app;
-using namespace std;
 
 #define APP_WIDTH		1280
 #define APP_HEIGHT		720
@@ -47,7 +46,6 @@ using namespace std;
 #define MAX_LANTERNS	16
 
 class MAPSSListener : public Leap::Listener {
-	
 public:
 	virtual void onInit(const Leap::Controller& leap) {
 		leap.enableGesture( Leap::Gesture::TYPE_SCREEN_TAP );
@@ -1061,12 +1059,6 @@ void MAPSS::draw()
 	}
 	
 	mThisFbo	= ( mThisFbo + 1 ) % 2;
-	mPrevFbo	= ( mThisFbo + 1 ) % 2;
-	
-//	if( mSaveFrames ){
-//		writeImage( getHomeDirectory() + "Flocking/" + toString( mNumSavedFrames ) + ".png", copyWindowSurface() );
-//		mNumSavedFrames ++;
-//	}
 	
 	if( getElapsedFrames()%60 == 0 ){
 		console() << "FPS = " << getAverageFps() << std::endl;
@@ -1111,7 +1103,6 @@ void MAPSS::drawInfoPanel()
 	
 	gl::popMatrices();
 }
-
 
 // HOLDS DATA FOR LANTERNS AND PREDATORS
 void MAPSS::drawIntoLanternsFbo()

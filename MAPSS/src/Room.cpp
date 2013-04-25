@@ -113,12 +113,7 @@ void Room::init()
 		texCoords.push_back( vTexCoords[tIndices[i][2]] );
 	}
 	
-	//	std::cout << "posCoords size = " << posCoords.size() << std::endl;
-	//	std::cout << "indices size = " << indices.size() << std::endl;
-	//	std::cout << "normals size = " << normals.size() << std::endl;
-	//	std::cout << "texCoords size = " << texCoords.size() << std::endl;	
-	
-	mVbo = gl::VboMesh( posCoords.size(), indices.size(), layout, GL_TRIANGLES );	
+	mVbo = gl::VboMesh( posCoords.size(), indices.size(), layout, GL_TRIANGLES );
 	mVbo.bufferIndices( indices );
 	mVbo.bufferPositions( posCoords );
 	mVbo.bufferNormals( normals );
@@ -180,7 +175,7 @@ bool Room::getTick()
 float Room::getLightPower()
 {
 	float p = getPower() * 5.0f * M_PI;
-	float lightPower = cos( p ) * 0.5f + 0.5f;	
+	float lightPower = cos( p ) * 0.5f + 0.5f;
 	return lightPower;
 }
 
