@@ -23,11 +23,18 @@ Lantern::Lantern( const Vec3f &pos )
 	mColor		= Color( CM_HSV, Rand::randFloat( 0.0f, 0.1f ), 0.9f, 1.0f );
 	mIsDead		= false;
 	mIsDying	= false;
+    deathTimer  = 1800;
 	
 	mVisiblePer	= 1.0f;
 }
 
 void Lantern::update( float dt, float yFloor ){
+
+	deathTimer--;
+    
+    if (deathTimer <= 0) {
+        mIsDying = true;
+    }
 	
 	if( mIsDying ){
 		mRadius -= ( mRadius - 0.0f ) * 0.2f;

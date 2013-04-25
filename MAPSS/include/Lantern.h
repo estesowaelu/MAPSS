@@ -21,6 +21,7 @@ class Lantern {
 	ci::Vec3f	mPos;
 	float		mRadius;
 	float		mRadiusDest;
+    int         deathTimer;
 	ci::Color	mColor;
 	
 	float		mVisiblePer;
