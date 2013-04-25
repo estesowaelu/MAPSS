@@ -1029,10 +1029,6 @@ void MAPSS::draw()
 	gl::disableDepthWrite();
 	gl::enableAlphaBlending();
 	
-	// DRAW PANEL
-	drawInfoPanel();
-
-	
 	if( false ){	// DRAW POSITION AND VELOCITY FBOS
 		gl::color( Color::white() );
 		gl::setMatricesWindow( getWindowSize() );
@@ -1060,40 +1056,7 @@ void MAPSS::draw()
 }
 
 
-void MAPSS::drawInfoPanel()
-{
-	gl::pushMatrices();
-	gl::translate( mRoom.getDims() );
-	gl::scale( Vec3f( -1.0f, -1.0f, 1.0f ) );
-	gl::color( Color( 1.0f, 1.0f, 1.0f ) * ( 1.0 - mRoom.getPower() ) );
-	gl::enableAlphaBlending();
-	
-	float iconWidth		= 50.0f;
-	
-	float X0			= 15.0f;
-	float X1			= X0 + iconWidth;
-	float Y0			= 300.0f;
-	float Y1			= Y0 + iconWidth;
-	
-	// DRAW ROOM NUM AND DESC
-	float c = mRoom.getPower() * 0.5f + 0.5f;
-	gl::color( ColorA( c, c, c, 0.5f ) );
-	gl::draw( mIconTex, Rectf( X0, Y0, X1, Y1 ) );
-	
-	c = mRoom.getPower();
-	gl::color( ColorA( c, c, c, 0.5f ) );
-	gl::disable( GL_TEXTURE_2D );
-	
-	// DRAW TIME BAR
-	float timePer		= mRoom.getTimePer();
-	gl::drawSolidRect( Rectf( Vec2f( X0, Y1 + 2.0f ), Vec2f( X0 + timePer * ( iconWidth ), Y1 + 2.0f + 4.0f ) ) );
-	
-	// DRAW FPS BAR
-	float fpsPer		= getAverageFps()/60.0f;
-	gl::drawSolidRect( Rectf( Vec2f( X0, Y1 + 4.0f + 4.0f ), Vec2f( X0 + fpsPer * ( iconWidth ), Y1 + 4.0f + 6.0f ) ) );
-	
-	
-	gl::popMatrices();
+	mPrevFbo	= ( mThisFbo + 1 ) % 2;	
 }
 
 // HOLDS DATA FOR LANTERNS AND PREDATORS
