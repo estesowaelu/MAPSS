@@ -16,12 +16,9 @@ const float MAX_TIMEMULTI	= 120.0f;
 
 using namespace ci;
 
-Room::Room()
-{
-}
+Room::Room() {}
 
-Room::Room( const Vec3f &dims, bool isPowerOn )
-{	
+Room::Room( const Vec3f &dims, bool isPowerOn ) {
 	// TIME
 	mTime			= (float)app::getElapsedSeconds();
 	mTimeElapsed	= 0.0f;
@@ -35,11 +32,9 @@ Room::Room( const Vec3f &dims, bool isPowerOn )
 	mIsPowerOn		= isPowerOn;
 	if( mIsPowerOn ) mPower = 1.0f;
 	else			 mPower = 0.0f;
-	
 }
 
-void Room::init()
-{
+void Room::init() {
 	int						index;
 	std::vector<uint32_t>	indices;
 	std::vector<ci::Vec3f>	posCoords;
@@ -145,62 +140,50 @@ void Room::update() {
 	mDims -= ( mDims - mDimsDest ) * 0.1f;
 }
 
-void Room::draw()
-{
+void Room::draw() {
 	gl::draw( mVbo );
 }
 
-void Room::adjustTimeMulti( float amt )
-{
+void Room::adjustTimeMulti( float amt ) {
 	mTimeMulti = constrain( mTimeMulti - amt, 0.0f, (float)MAX_TIMEMULTI );
 }
 
-float Room::getTimePer()
-{
+float Room::getTimePer() {
 	return mTimeMulti/MAX_TIMEMULTI;
 }
 
-float Room::getTimeDelta()
-{
+float Room::getTimeDelta() {
 	return mTimeAdjusted;
 }
 
-bool Room::getTick()
-{
+bool Room::getTick() {
 	return mTick;
 }
 
-float Room::getLightPower()
-{
+float Room::getLightPower() {
 	float p = getPower() * 5.0f * M_PI;
 	float lightPower = cos( p ) * 0.5f + 0.5f;
 	return lightPower;
 }
 
-Vec3f Room::getRandCeilingPos()
-{
+Vec3f Room::getRandCeilingPos() {
 	return Vec3f( Rand::randFloat( -mDims.x * 0.8f, mDims.x * 0.8f ), 
 				 mDims.y, 
 				 Rand::randFloat( -mDims.z * 0.5f, mDims.z * 0.5f ) );
 }
 
-Vec3f Room::getCornerCeilingPos()
-{
+Vec3f Room::getCornerCeilingPos() {
 	return Vec3f( mDims.x, mDims.y,-mDims.z ) * 0.9f;
 }
 
-Vec3f Room::getCornerFloorPos()
-{
+Vec3f Room::getCornerFloorPos() {
 	return Vec3f(-mDims.x,-mDims.y,-mDims.z ) * 0.9f;	
 }
 
-Vec3f Room::getLeftWallPos()
-{
+Vec3f Room::getLeftWallPos() {
 	return Vec3f( mDims.x, 0.0f, 0.0f ) * 0.9f;
 }
 
-float Room::getFloorLevel()
-{
+float Room::getFloorLevel() {
 	return -mDims.y;
 }
-

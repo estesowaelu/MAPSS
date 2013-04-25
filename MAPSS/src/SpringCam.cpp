@@ -10,12 +10,9 @@
 
 using namespace ci;
 
-SpringCam::SpringCam()
-{
-}
+SpringCam::SpringCam() {}
 
-SpringCam::SpringCam( float camDist, float aspectRatio )
-{
+SpringCam::SpringCam( float camDist, float aspectRatio ) {
 	mCamDist		= camDist;
 	
 	mEye			= Vec3f( 0.0f, 0.0f, mCamDist );
@@ -32,8 +29,7 @@ SpringCam::SpringCam( float camDist, float aspectRatio )
 	mCam.setPerspective( 65.0f, aspectRatio, 5.0f, 3000.0f );
 }
 
-void SpringCam::update( float timeDelta )
-{	
+void SpringCam::update( float timeDelta ) {
 	mEyeNode.apply();
 	mCenNode.apply();
 	
@@ -47,7 +43,6 @@ void SpringCam::update( float timeDelta )
 	mCam.getBillboardVectors( &mBillboardRight, &mBillboardUp );
 }
 
-void SpringCam::dragCam( const Vec2f &posOffset, float distFromCenter )
-{
+void SpringCam::dragCam( const Vec2f &posOffset, float distFromCenter ) {
 	mEyeNode.mAcc += Vec3f( posOffset.xy(), distFromCenter );
 }

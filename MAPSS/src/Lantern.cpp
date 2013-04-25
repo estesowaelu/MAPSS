@@ -27,8 +27,7 @@ Lantern::Lantern( const Vec3f &pos, Color col ) {
 	mVisiblePer	= 1.0f;
 }
 
-void Lantern::update( float dt, float yFloor ){
-
+void Lantern::update( float dt, float yFloor ) {
 	deathTimer--;
     
     if (deathTimer <= 0) {
@@ -44,6 +43,6 @@ void Lantern::update( float dt, float yFloor ){
 	}
 }
 
-void Lantern::draw(){
+void Lantern::draw() {
 	gl::drawSphere( mPos, mRadius * 0.5f, 32 );
 }

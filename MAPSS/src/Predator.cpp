@@ -14,10 +14,9 @@
 using namespace ci;
 using std::vector;
 
-Predator::Predator(){}
+Predator::Predator() {}
 
-Predator::Predator( const Vec3f &pos )
-{
+Predator::Predator( const Vec3f &pos ) {
 	mLen = 15;
 	for( int i=0; i<mLen; i++ ){
 		float per = (float)i/(float)(mLen-1);
@@ -26,8 +25,7 @@ Predator::Predator( const Vec3f &pos )
 	}
 }
 
-void Predator::update( const Vec3f &pos )
-{
+void Predator::update( const Vec3f &pos ) {
 	for( int i=mLen-1; i>0; i-- ){
 		mPositions[i] = mPositions[i-1];
 	}
@@ -35,8 +33,7 @@ void Predator::update( const Vec3f &pos )
 	mPositions[0]	= mPos;
 }
 
-void Predator::draw()
-{
+void Predator::draw() {
 	for( int i=0; i<mLen-1; i++ ){
 		gl::vertex( mPositions[i] );
 		gl::vertex( mPositions[i+1] );

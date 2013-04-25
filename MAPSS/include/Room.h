@@ -11,8 +11,7 @@
 #pragma once
 #include "cinder/gl/Vbo.h"
 
-class Room
-{
+class Room {
 public:
 	Room();
 	Room( const ci::Vec3f &dims, bool isPowerOn );

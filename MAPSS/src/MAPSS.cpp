@@ -43,7 +43,7 @@ using namespace ci::app;
 #define ROOM_FBO_RES	2
 #define FBO_DIM			50//167
 #define P_FBO_DIM		5
-#define MAX_LANTERNS	32
+#define MAX_LANTERNS	24
 
 class MAPSSListener : public Leap::Listener {
 public:
@@ -143,7 +143,6 @@ private:
 	Leap::Controller controller;
 	MAPSSListener listener;
 	Leap::Frame lastFrame;
-
 };
 
 //Handle Leap Gesture processing.
@@ -198,16 +197,14 @@ Vec3f MAPSS::normalizeCoords(const Leap::Vector& vec) {
 	return result;
 }
 
-void MAPSS::prepareSettings( Settings *settings )
-{
+void MAPSS::prepareSettings( Settings *settings ) {
 	settings->setWindowSize( APP_WIDTH, APP_HEIGHT );
 	settings->setFrameRate(120); //absurdly high on purpose
 	settings->setFullScreen(false);
 //	settings->setBorderless();
 }
 
-void MAPSS::setup()
-{
+void MAPSS::setup() {
 	// CAMERA	
 	mSpringCam			= SpringCam( -420.0f, getWindowAspectRatio() );
 	
@@ -229,7 +226,6 @@ void MAPSS::setup()
 	
 	// TEXTURES
 	mLanternGlowTex		= gl::Texture( loadImage( loadResource( RES_LANTERNGLOW_PNG ) ) );
-	mIconTex			= gl::Texture( loadImage( loadResource( "iconFlocking.png" ) ), mipFmt );
 	
 	// LOAD SHADERS
 	try {
@@ -251,8 +247,6 @@ void MAPSS::setup()
 	roomFormat.setColorInternalFormat( GL_RGB );
 	mRoomFbo			= gl::Fbo( APP_WIDTH/ROOM_FBO_RES, APP_HEIGHT/ROOM_FBO_RES, roomFormat );
 	bool isPowerOn		= false;
-//	bool isGravityOn	= true;
-//	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn, isGravityOn );
 	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn );
 	mRoom.init();
 	
@@ -275,8 +269,7 @@ void MAPSS::setup()
 	initialize();
 }
 
-void MAPSS::initialize()
-{
+void MAPSS::initialize() {
 	gl::disableAlphaBlending();
 	gl::disableDepthWrite();
 	gl::disableDepthRead();
@@ -293,7 +286,6 @@ void MAPSS::initialize()
 	setFboPositions( mPositionFbos[1] );
 	setFboVelocities( mVelocityFbos[0] );
 	setFboVelocities( mVelocityFbos[1] );
-	
 	
 	mP_FboDim			= P_FBO_DIM;
 	mP_FboSize			= Vec2f( mP_FboDim, mP_FboDim );
@@ -312,8 +304,7 @@ void MAPSS::initialize()
 	initPredatorVbo();
 }
 
-void MAPSS::setFboPositions( gl::Fbo fbo )
-{	
+void MAPSS::setFboPositions( gl::Fbo fbo ) {
 	// FISH POSITION
 	Surface32f posSurface( fbo.getTexture() );
 	Surface32f::Iter it = posSurface.getIter();
@@ -342,8 +333,7 @@ void MAPSS::setFboPositions( gl::Fbo fbo )
 	fbo.unbindFramebuffer();
 }
 
-void MAPSS::setFboVelocities( gl::Fbo fbo )
-{
+void MAPSS::setFboVelocities( gl::Fbo fbo ) {
 	// FISH VELOCITY
 	Surface32f velSurface( fbo.getTexture() );
 	Surface32f::Iter it = velSurface.getIter();
@@ -369,8 +359,7 @@ void MAPSS::setFboVelocities( gl::Fbo fbo )
 	fbo.unbindFramebuffer();
 }
 
-void MAPSS::setPredatorFboPositions( gl::Fbo fbo )
-{	
+void MAPSS::setPredatorFboPositions( gl::Fbo fbo ) {
 	// PREDATOR POSITION
 	Surface32f posSurface( fbo.getTexture() );
 	Surface32f::Iter it = posSurface.getIter();
@@ -392,8 +381,7 @@ void MAPSS::setPredatorFboPositions( gl::Fbo fbo )
 	fbo.unbindFramebuffer();
 }
 
-void MAPSS::setPredatorFboVelocities( gl::Fbo fbo )
-{
+void MAPSS::setPredatorFboVelocities( gl::Fbo fbo ) {
 	// PREDATOR VELOCITY
 	Surface32f velSurface( fbo.getTexture() );
 	Surface32f::Iter it = velSurface.getIter();
@@ -415,8 +403,7 @@ void MAPSS::setPredatorFboVelocities( gl::Fbo fbo )
 	fbo.unbindFramebuffer();
 }
 
-void MAPSS::initVbo()
-{
+void MAPSS::initVbo() {
 	gl::VboMesh::Layout layout;
 	layout.setStaticPositions();
 	layout.setStaticTexCoords2d();
@@ -438,12 +425,6 @@ void MAPSS::initVbo()
 	Vec3f p5( 0.0f, 0.0f, -5.0f );
 	
 	Vec3f n;
-//	Vec3f n0 = Vec3f( 0.0f, 0.0f, 1.0f );
-//	Vec3f n1 = Vec3f(-1.0f,-1.0f, 0.0f ).normalized();
-//	Vec3f n2 = Vec3f(-1.0f, 1.0f, 0.0f ).normalized();
-//	Vec3f n3 = Vec3f( 1.0f, 1.0f, 0.0f ).normalized();
-//	Vec3f n4 = Vec3f( 1.0f,-1.0f, 0.0f ).normalized();
-//	Vec3f n5 = Vec3f( 0.0f, 0.0f,-1.0f );
 	
 	vector<Vec3f>		positions;
 	vector<Vec3f>		normals;
@@ -499,9 +480,6 @@ void MAPSS::initVbo()
 			normals.push_back( n );
 			normals.push_back( n );
 			
-			
-			
-			
 			positions.push_back( p5 );
 			positions.push_back( p1 );
 			positions.push_back( p4 );
@@ -545,8 +523,6 @@ void MAPSS::initVbo()
 			normals.push_back( n );
 			normals.push_back( n );
 			normals.push_back( n );
-			
-			
 		}
 	}
 	
@@ -556,8 +532,7 @@ void MAPSS::initVbo()
 	mVboMesh.unbindBuffers();
 }
 
-void MAPSS::initPredatorVbo()
-{
+void MAPSS::initPredatorVbo() {
 	gl::VboMesh::Layout layout;
 	layout.setStaticPositions();
 	layout.setStaticTexCoords2d();
@@ -578,15 +553,7 @@ void MAPSS::initPredatorVbo()
 	Vec3f p4( 0.0f, -s * 0.5f, 0.0f );
 	Vec3f p5( 0.0f, 0.0f, -12.0f );
 	
-
-	
 	Vec3f n;
-//	Vec3f n0 = Vec3f( 0.0f, 0.0f, 1.0f );
-//	Vec3f n1 = Vec3f(-1.0f, 0.0f, 0.0f ).normalized();
-//	Vec3f n2 = Vec3f( 0.0f, 1.0f, 0.0f ).normalized();
-//	Vec3f n3 = Vec3f( 1.0f, 0.0f, 0.0f ).normalized();
-//	Vec3f n4 = Vec3f( 0.0f,-1.0f, 0.0f ).normalized();
-//	Vec3f n5 = Vec3f( 0.0f, 0.0f,-1.0f );
 	
 	vector<Vec3f>		positions;
 	vector<Vec3f>		normals;
@@ -642,9 +609,6 @@ void MAPSS::initPredatorVbo()
 			normals.push_back( n );
 			normals.push_back( n );
 			
-			
-			
-			
 			positions.push_back( p5 );
 			positions.push_back( p1 );
 			positions.push_back( p4 );
@@ -688,8 +652,6 @@ void MAPSS::initPredatorVbo()
 			normals.push_back( n );
 			normals.push_back( n );
 			normals.push_back( n );
-			
-			
 		}
 	}
 	
@@ -700,47 +662,38 @@ void MAPSS::initPredatorVbo()
 }
 
 
-void MAPSS::mouseDown( MouseEvent event )
-{
+void MAPSS::mouseDown( MouseEvent event ) {
 	mMouseDownPos = event.getPos();
 	mMousePressed = true;
 	mMouseOffset = Vec2f::zero();
 }
 
-void MAPSS::mouseUp( MouseEvent event )
-{
+void MAPSS::mouseUp( MouseEvent event ) {
 	mMousePressed = false;
 	mMouseOffset = Vec2f::zero();
 }
 
-void MAPSS::mouseMove( MouseEvent event )
-{
+void MAPSS::mouseMove( MouseEvent event ) {
 	mMousePos = event.getPos();
 }
 
-void MAPSS::mouseDrag( MouseEvent event )
-{
+void MAPSS::mouseDrag( MouseEvent event ) {
 	mouseMove( event );
 	mMouseOffset = ( mMousePos - mMouseDownPos );
 }
 
-void MAPSS::mouseWheel( MouseEvent event )
-{
+void MAPSS::mouseWheel( MouseEvent event ) {
 	float dWheel = event.getWheelIncrement();
 	mRoom.adjustTimeMulti( dWheel );
 }
 
-void MAPSS::keyDown( KeyEvent event )
-{
+void MAPSS::keyDown( KeyEvent event ) {
 //	if( event.getChar() == ' ' ){
 //		mRoom.togglePower();
-//	} else if( event.getChar() == 'l' ){
-//		mController.addLantern( mRoom.getRandCeilingPos() );
 //	}
 }
 
-void MAPSS::update()
-{
+void MAPSS::update() {
 	processGestures();
 
 	if( !mInitUpdateCalled ){
@@ -754,9 +707,10 @@ void MAPSS::update()
 	mController.update();
 
 	// CAMERA
-	if( mMousePressed ){
+	if( mMousePressed ) {
 		mSpringCam.dragCam( ( mMouseOffset ) * 0.01f, ( mMouseOffset ).length() * 0.01f );
 	}
+
 	mSpringCam.update( 0.3f );
 	
 	gl::disableAlphaBlending();
@@ -774,8 +728,7 @@ void MAPSS::update()
 
 
 // FISH VELOCITY
-void MAPSS::drawIntoVelocityFbo()
-{
+void MAPSS::drawIntoVelocityFbo() {
 	gl::setMatricesWindow( mFboSize, false );
 	gl::setViewport( mFboBounds );
 	
@@ -810,8 +763,7 @@ void MAPSS::drawIntoVelocityFbo()
 }
 
 // FISH POSITION
-void MAPSS::drawIntoPositionFbo()
-{	
+void MAPSS::drawIntoPositionFbo() {
 	gl::setMatricesWindow( mFboSize, false );
 	gl::setViewport( mFboBounds );
 	
@@ -830,8 +782,7 @@ void MAPSS::drawIntoPositionFbo()
 }
 
 // PREDATOR VELOCITY
-void MAPSS::drawIntoPredatorVelocityFbo()
-{
+void MAPSS::drawIntoPredatorVelocityFbo() {
 	gl::setMatricesWindow( mP_FboSize, false );
 	gl::setViewport( mP_FboBounds );
 	
@@ -866,8 +817,7 @@ void MAPSS::drawIntoPredatorVelocityFbo()
 }
 
 // PREDATOR POSITION
-void MAPSS::drawIntoPredatorPositionFbo()
-{
+void MAPSS::drawIntoPredatorPositionFbo() {
 	gl::setMatricesWindow( mP_FboSize, false );
 	gl::setViewport( mP_FboBounds );
 	
@@ -885,14 +835,12 @@ void MAPSS::drawIntoPredatorPositionFbo()
 	mP_PositionFbos[ mThisFbo ].unbindFramebuffer();
 }
 
-void MAPSS::drawIntoRoomFbo()
-{
+void MAPSS::drawIntoRoomFbo() {
 	gl::setMatricesWindow( mRoomFbo.getSize(), false );
 	gl::setViewport( mRoomFbo.getBounds() );
 	
 	mRoomFbo.bindFramebuffer();
 	gl::clear( ColorA( 0.0f, 0.0f, 0.0f, 0.0f ), true );
-	
 	
 	gl::disableAlphaBlending();
 	gl::enable( GL_TEXTURE_2D );
@@ -923,11 +871,11 @@ void MAPSS::drawIntoRoomFbo()
 	glDisable( GL_CULL_FACE );
 }
 
-void MAPSS::draw()
-{
+void MAPSS::draw() {
 	if( !mInitUpdateCalled ){
 		return;
 	}
+
 	gl::clear( ColorA( 0.1f, 0.1f, 0.1f, 0.0f ), true );
 	gl::color( ColorA( 1.0f, 1.0f, 1.0f, 1.0f ) );
 	
@@ -990,14 +938,12 @@ void MAPSS::draw()
 	mP_Shader.unbind();
 	
 	// DRAW LANTERN GLOWS
-//	if( mRoom.isPowerOn() ){
-		gl::disableDepthWrite();
-		gl::enableAdditiveBlending();
-		float c =  mRoom.getPower();
-		gl::color( Color( c, c, c ) );
-		mLanternGlowTex.bind();
-		mController.drawLanternGlows( mSpringCam.mBillboardRight, mSpringCam.mBillboardUp );
-//	}
+    gl::disableDepthWrite();
+    gl::enableAdditiveBlending();
+    float c =  mRoom.getPower();
+    gl::color( Color( c, c, c ) );
+    mLanternGlowTex.bind();
+    mController.drawLanternGlows( mSpringCam.mBillboardRight, mSpringCam.mBillboardUp );
 	
 	gl::disable( GL_TEXTURE_2D );
 	gl::enableDepthWrite();
@@ -1038,8 +984,7 @@ void MAPSS::draw()
 }
 
 // HOLDS DATA FOR LANTERNS AND PREDATORS
-void MAPSS::drawIntoLanternsFbo()
-{
+void MAPSS::drawIntoLanternsFbo() {
 	Surface32f lanternsSurface( mLanternsFbo.getTexture() );
 	Surface32f::Iter it = lanternsSurface.getIter();
 	while( it.line() ){
@@ -1080,7 +1025,5 @@ void MAPSS::drawIntoLanternsFbo()
 	gl::draw( gl::Texture( lanternsSurface ) );
 	mLanternsFbo.unbindFramebuffer();
 }
-
-
 
 CINDER_APP_BASIC( MAPSS, RendererGl )
