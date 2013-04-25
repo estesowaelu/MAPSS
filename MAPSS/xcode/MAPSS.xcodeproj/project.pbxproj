@@ -40,12 +40,6 @@
 		E19E0283154E6E8A00CB2230 /* lanternGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = E19E0282154E6E8A00CB2230 /* lanternGlow.png */; };
 		E1AE00E7153D0B02000CE780 /* passThru.vert in Resources */ = {isa = PBXBuildFile; fileRef = E1AE00E6153D0B02000CE780 /* passThru.vert */; };
 		E1AE00EC153D0C32000CE780 /* passThruNormals.vert in Resources */ = {isa = PBXBuildFile; fileRef = E1AE00EB153D0C32000CE780 /* passThruNormals.vert */; };
-		E1DA84E6155F56C40063B184 /* glow.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DA84E2155F56C40063B184 /* glow.png */; };
-		E1DA84E7155F56C40063B184 /* glow.frag in Resources */ = {isa = PBXBuildFile; fileRef = E1DA84E3155F56C40063B184 /* glow.frag */; };
-		E1DA84E8155F56C40063B184 /* nebula.frag in Resources */ = {isa = PBXBuildFile; fileRef = E1DA84E4155F56C40063B184 /* nebula.frag */; };
-		E1DA84E9155F56C40063B184 /* nebula.png in Resources */ = {isa = PBXBuildFile; fileRef = E1DA84E5155F56C40063B184 /* nebula.png */; };
-		E1DA84EC155F57120063B184 /* Glow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DA84EA155F57120063B184 /* Glow.cpp */; };
-		E1DA84ED155F57120063B184 /* Nebula.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DA84EB155F57120063B184 /* Nebula.cpp */; };
 		E1DA84F2155F6D5B0063B184 /* Predator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DA84F1155F6D5B0063B184 /* Predator.cpp */; };
 		E1DA84F4155F6E8D0063B184 /* P_VboPos.frag in Resources */ = {isa = PBXBuildFile; fileRef = E1DA84F3155F6E8D0063B184 /* P_VboPos.frag */; };
 		E1FF62321574702D00C1A823 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E1FF62311574702D00C1A823 /* icon.icns */; };
@@ -109,14 +103,6 @@
 		E1A2E0F9154CCA40007A956C /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 		E1AE00E6153D0B02000CE780 /* passThru.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = passThru.vert; path = ../resources/passThru.vert; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		E1AE00EB153D0C32000CE780 /* passThruNormals.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = passThruNormals.vert; path = ../resources/passThruNormals.vert; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		E1DA84E2155F56C40063B184 /* glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = glow.png; path = ../resources/glow.png; sourceTree = "<group>"; };
-		E1DA84E3155F56C40063B184 /* glow.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = glow.frag; path = ../resources/glow.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		E1DA84E4155F56C40063B184 /* nebula.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = nebula.frag; path = ../resources/nebula.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		E1DA84E5155F56C40063B184 /* nebula.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nebula.png; path = ../resources/nebula.png; sourceTree = "<group>"; };
-		E1DA84EA155F57120063B184 /* Glow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Glow.cpp; path = ../src/Glow.cpp; sourceTree = "<group>"; };
-		E1DA84EB155F57120063B184 /* Nebula.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Nebula.cpp; path = ../src/Nebula.cpp; sourceTree = "<group>"; };
-		E1DA84EE155F571E0063B184 /* Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Glow.h; path = ../include/Glow.h; sourceTree = "<group>"; };
-		E1DA84EF155F571E0063B184 /* Nebula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Nebula.h; path = ../include/Nebula.h; sourceTree = "<group>"; };
 		E1DA84F0155F6CC20063B184 /* Predator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Predator.h; path = ../include/Predator.h; sourceTree = "<group>"; };
 		E1DA84F1155F6D5B0063B184 /* Predator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Predator.cpp; path = ../src/Predator.cpp; sourceTree = "<group>"; };
 		E1DA84F3155F6E8D0063B184 /* P_VboPos.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = P_VboPos.frag; path = ../resources/P_VboPos.frag; sourceTree = "<group>"; };
@@ -154,8 +140,6 @@
 				E19E0277154E667400CB2230 /* Room.cpp */,
 				E1DA84F1155F6D5B0063B184 /* Predator.cpp */,
 				E19E0275154E667400CB2230 /* Lantern.cpp */,
-				E1DA84EA155F57120063B184 /* Glow.cpp */,
-				E1DA84EB155F57120063B184 /* Nebula.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -216,8 +200,6 @@
 				E19E027D154E667D00CB2230 /* Room.h */,
 				E1DA84F0155F6CC20063B184 /* Predator.h */,
 				E19E027B154E667D00CB2230 /* Lantern.h */,
-				E1DA84EE155F571E0063B184 /* Glow.h */,
-				E1DA84EF155F571E0063B184 /* Nebula.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -248,8 +230,6 @@
 			children = (
 				E154E0BA154FCE6D0032FD67 /* lantern.vert */,
 				E154E0B9154FCE6D0032FD67 /* lantern.frag */,
-				E1DA84E4155F56C40063B184 /* nebula.frag */,
-				E1DA84E3155F56C40063B184 /* glow.frag */,
 				E13C27BD154E17350087EB10 /* Velocity.frag */,
 				E13C27BA154E17350087EB10 /* Position.frag */,
 				E13C27BC154E17350087EB10 /* VboPos.vert */,
@@ -270,8 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				E1202EF115736825006A09D2 /* iconFlocking.png */,
-				E1DA84E2155F56C40063B184 /* glow.png */,
-				E1DA84E5155F56C40063B184 /* nebula.png */,
 				E11993B8155DBC7D002AFBCF /* icons.png */,
 				E19E0282154E6E8A00CB2230 /* lanternGlow.png */,
 			);
@@ -361,11 +339,7 @@
 				E149FFEF15491867007C6AE9 /* room.vert in Resources */,
 				E154E0BC154FCE6D0032FD67 /* lantern.vert in Resources */,
 				E154E0BB154FCE6D0032FD67 /* lantern.frag in Resources */,
-				E1DA84E7155F56C40063B184 /* glow.frag in Resources */,
-				E1DA84E8155F56C40063B184 /* nebula.frag in Resources */,
 				E11993BB155DBC7D002AFBCF /* icons.png in Resources */,
-				E1DA84E6155F56C40063B184 /* glow.png in Resources */,
-				E1DA84E9155F56C40063B184 /* nebula.png in Resources */,
 				E19E0283154E6E8A00CB2230 /* lanternGlow.png in Resources */,
 				E1202EF215736825006A09D2 /* iconFlocking.png in Resources */,
 				E1FF62321574702D00C1A823 /* icon.icns in Resources */,
@@ -384,8 +358,6 @@
 				E19E0278154E667400CB2230 /* Lantern.cpp in Sources */,
 				E19E0279154E667400CB2230 /* Controller.cpp in Sources */,
 				E19E027A154E667400CB2230 /* Room.cpp in Sources */,
-				E1DA84EC155F57120063B184 /* Glow.cpp in Sources */,
-				E1DA84ED155F57120063B184 /* Nebula.cpp in Sources */,
 				E1DA84F2155F6D5B0063B184 /* Predator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

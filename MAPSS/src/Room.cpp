@@ -13,7 +13,6 @@
 #include "Room.h"
 
 const float MAX_TIMEMULTI	= 120.0f;
-const float GRAVITY			= -0.02f;
 
 using namespace ci;
 
@@ -21,7 +20,7 @@ Room::Room()
 {
 }
 
-Room::Room( const Vec3f &dims, bool isPowerOn, bool isGravityOn )
+Room::Room( const Vec3f &dims, bool isPowerOn )
 {	
 	// TIME
 	mTime			= (float)app::getElapsedSeconds();
@@ -37,8 +36,6 @@ Room::Room( const Vec3f &dims, bool isPowerOn, bool isGravityOn )
 	if( mIsPowerOn ) mPower = 1.0f;
 	else			 mPower = 0.0f;
 	
-	mIsGravityOn	= isGravityOn;
-	mDefaultGravity = Vec3f( 0.0f, GRAVITY, 0.0f );
 }
 
 void Room::init()
@@ -151,9 +148,6 @@ void Room::update( bool saveFrames )
 	
 	if( mIsPowerOn )	mPower -= ( mPower - 1.0f ) * 0.2f;
 	else				mPower -= ( mPower - 0.0f ) * 0.2f;
-	
-	if( mIsGravityOn )	mGravity -= ( mGravity - mDefaultGravity ) * 0.2f;
-	else				mGravity -= ( mGravity - Vec3f::zero() ) * 0.2f;
 	
 	mDims -= ( mDims - mDimsDest ) * 0.1f;
 }

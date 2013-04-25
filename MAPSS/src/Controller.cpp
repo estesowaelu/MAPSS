@@ -82,43 +82,9 @@ void Controller::update()
 		}
 	}
 	
-	// ADD GLOWS AND NEBULA EFFECTS
-	if( mRoom->mTick ){
-		for( std::vector<Lantern>::iterator it = mLanterns.begin(); it != mLanterns.end(); ){
-			// ADD GLOWS
-			int numGlowsToSpawn = 5;
-			addGlows( &(*it), numGlowsToSpawn );
-			
-			// ADD NEBULAS
-			int numNebulasToSpawn = 1;
-			addNebulas( &(*it), numNebulasToSpawn );
-			
-			++it;
-		}
-	}
 	
 	// SORT LANTERNS
 	sort( mLanterns.begin(), mLanterns.end(), depthSortFunc );
-	
-	// GLOWS
-	for( vector<Glow>::iterator it = mGlows.begin(); it != mGlows.end(); ){
-		if( it->mIsDead ){
-			it = mGlows.erase( it );
-		} else {
-			it->update( mRoom->mTimeAdjusted );
-			++ it;
-		}
-	}
-	
-	// NEBULAS
-	for( vector<Nebula>::iterator it = mNebulas.begin(); it != mNebulas.end(); ){
-		if( it->mIsDead ){
-			it = mNebulas.erase( it );
-		} else {
-			it->update( mRoom->mTimeAdjusted );
-			++ it;
-		}
-	}
 }
 
 
@@ -142,64 +108,11 @@ void Controller::drawLanternGlows( const Vec3f &right, const Vec3f &up )
 	}
 }
 
-void Controller::drawGlows( gl::GlslProg *shader, const Vec3f &right, const Vec3f &up )
-{
-	for( vector<Glow>::iterator it = mGlows.begin(); it != mGlows.end(); ++it ){
-		shader->uniform( "alpha", it->mAgePer );
-		shader->uniform( "color", it->mColor );
-		it->draw( right, up );
-	}
-}
-
-void Controller::drawNebulas( gl::GlslProg *shader, const Vec3f &right, const Vec3f &up )
-{
-	for( vector<Nebula>::iterator it = mNebulas.begin(); it != mNebulas.end(); ++it ){
-		shader->uniform( "alpha", it->mAgePer );
-		shader->uniform( "color", it->mColor );
-		it->draw( right, up );
-	}
-}
 
 void Controller::addLantern( const Vec3f &pos )
 {
 	if( mNumLanterns < mMaxLanterns ){
 		mLanterns.push_back( Lantern( pos ) );
-	}
-}
-
-void Controller::addGlows( Lantern *lantern, int amt )
-{
-	for( int i=0; i<amt; i++ ){
-		float radius	= Rand::randFloat( 5.0f, 6.0f );
-		Vec3f dir		= Rand::randVec3f();
-		Vec3f pos		= lantern->mPos + dir * ( lantern->mRadius - radius );
-		dir.xz() *= -0.25f;
-		Vec3f vel		= dir * Rand::randFloat( 0.3f, 0.5f );
-		float lifespan	= Rand::randFloat( 115.0f, 130.0f );
-		Color col		= lantern->mColor;
-		
-		mGlows.push_back( Glow( pos, vel, radius, col, lifespan ) );
-		
-		if( Rand::randFloat() < 0.01f )
-			mGlows.push_back( Glow( pos, Vec3f( vel.x, 1.5f, vel.z ), radius * 0.5f, col, lifespan * 0.5f ) );
-	}
-}
-
-void Controller::addNebulas( Lantern *lantern, int amt )
-{
-	for( int i=0; i<amt; i++ ){
-		float radius		= Rand::randFloat( 5.0f, 8.0f );
-		Vec3f dir			= Rand::randVec3f();
-		Vec3f pos			= lantern->mPos + dir * ( lantern->mRadius - radius );
-		dir.xz() *= -0.25f;
-		Vec3f vel			= dir * Rand::randFloat( 0.05f, 0.1f );
-		float lifespan		= Rand::randFloat( 135.0f, 155.0f );
-		Color col		= lantern->mColor;
-		
-		mNebulas.push_back( Nebula( pos, vel, radius, col, lifespan ) );
-		
-		if( Rand::randFloat() < 0.01f )
-			mNebulas.push_back( Nebula( pos, Vec3f( vel.x, 1.5f, vel.z ), radius * 0.5f, col, lifespan * 0.5f ) );
 	}
 }
 

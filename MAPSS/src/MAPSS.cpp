@@ -83,8 +83,6 @@ public:
 	void				drawIntoPredatorVelocityFbo();
 	void				drawIntoPredatorPositionFbo();
 	void				drawIntoLanternsFbo();
-	void				drawGlows();
-	void				drawNebulas();
 	virtual void		draw();
 	
 	void processGestures();
@@ -96,8 +94,6 @@ public:
 	
 	// TEXTURES
 	gl::Texture			mLanternGlowTex;
-	gl::Texture			mGlowTex;
-	gl::Texture			mNebulaTex;
 	gl::Texture			mIconTex;
 	
 	// SHADERS
@@ -109,8 +105,6 @@ public:
 	gl::GlslProg		mRoomShader;
 	gl::GlslProg		mShader;
 	gl::GlslProg		mP_Shader;
-	gl::GlslProg		mGlowShader;
-	gl::GlslProg		mNebulaShader;
 	
 	// CONTROLLER
 	Controller			mController;
@@ -255,8 +249,6 @@ void MAPSS::setup()
 	
 	// TEXTURES
 	mLanternGlowTex		= gl::Texture( loadImage( loadResource( RES_LANTERNGLOW_PNG ) ) );
-	mGlowTex			= gl::Texture( loadImage( loadResource( RES_GLOW_PNG ) ) );
-	mNebulaTex			= gl::Texture( loadImage( loadResource( RES_NEBULA_PNG ) ) );
 	mIconTex			= gl::Texture( loadImage( loadResource( "iconFlocking.png" ) ), mipFmt );
 	
 	// LOAD SHADERS
@@ -269,8 +261,6 @@ void MAPSS::setup()
 		mRoomShader			= gl::GlslProg( loadResource( RES_ROOM_VERT ),		loadResource( RES_ROOM_FRAG ) );
 		mShader				= gl::GlslProg( loadResource( RES_VBOPOS_VERT ),	loadResource( RES_VBOPOS_FRAG ) );
 		mP_Shader			= gl::GlslProg( loadResource( RES_P_VBOPOS_VERT ),	loadResource( RES_P_VBOPOS_FRAG ) );
-		mGlowShader			= gl::GlslProg( loadResource( RES_PASSTHRU_VERT ),	loadResource( RES_GLOW_FRAG ) );
-		mNebulaShader		= gl::GlslProg( loadResource( RES_PASSTHRU_VERT ),	loadResource( RES_NEBULA_FRAG ) );
 	} catch( gl::GlslProgCompileExc e ) {
 		std::cout << e.what() << std::endl;
 		quit();
@@ -281,8 +271,9 @@ void MAPSS::setup()
 	roomFormat.setColorInternalFormat( GL_RGB );
 	mRoomFbo			= gl::Fbo( APP_WIDTH/ROOM_FBO_RES, APP_HEIGHT/ROOM_FBO_RES, roomFormat );
 	bool isPowerOn		= true;
-	bool isGravityOn	= true;
-	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn, isGravityOn );	
+//	bool isGravityOn	= true;
+//	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn, isGravityOn );
+	mRoom				= Room( Vec3f( ROOM_WIDTH, ROOM_HEIGHT, ROOM_DEPTH ), isPowerOn );
 	mRoom.init();
 	
 	// CONTROLLER
@@ -1029,9 +1020,6 @@ void MAPSS::draw()
 		gl::color( Color( c, c, c ) );
 		mLanternGlowTex.bind();
 		mController.drawLanternGlows( mSpringCam.mBillboardRight, mSpringCam.mBillboardUp );
-		
-		drawGlows();
-		drawNebulas();
 //	}
 	
 	gl::disable( GL_TEXTURE_2D );
@@ -1085,25 +1073,8 @@ void MAPSS::draw()
 	}
 }
 
-void MAPSS::drawGlows()
-{
-	mGlowTex.bind( 0 );
-	mGlowShader.bind();
-	mGlowShader.uniform( "glowTex", 0 );
-	mGlowShader.uniform( "roomDims", mRoom.getDims() );
-	mController.drawGlows( &mGlowShader, mSpringCam.mBillboardRight, mSpringCam.mBillboardUp );
-	mGlowShader.unbind();
 }
 
-void MAPSS::drawNebulas()
-{
-	mNebulaTex.bind( 0 );
-	mNebulaShader.bind();
-	mNebulaShader.uniform( "nebulaTex", 0 );
-	mNebulaShader.uniform( "roomDims", mRoom.getDims() );	
-	mController.drawNebulas( &mNebulaShader, mSpringCam.mBillboardRight, mSpringCam.mBillboardUp );
-	mNebulaShader.unbind();
-}
 
 void MAPSS::drawInfoPanel()
 {

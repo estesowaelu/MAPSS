@@ -15,7 +15,7 @@ class Room
 {
 public:
 	Room();
-	Room( const ci::Vec3f &dims, bool isPowerOn, bool isGravityOn );
+	Room( const ci::Vec3f &dims, bool isPowerOn );
 	void		init();
 	void		updateTime( bool saveFrames );
 	void		update( bool saveFrames );
@@ -40,10 +40,6 @@ public:
 	
 	float		getLightPower();
 	
-	void		toggleGravity(){	mIsGravityOn = !mIsGravityOn;	};
-	ci::Vec3f	getGravity(){		return mGravity;				};
-	bool		isGravityOn(){		return mIsGravityOn;			};
-	
 	ci::gl::VboMesh mVbo;
 	
 	// TIME
@@ -62,9 +58,4 @@ public:
 	bool			mIsPowerOn;			// Power ranges from 0.0 to 1.0.
 	float			mPower;
 	
-	// GRAVITY
-	ci::Vec3f		mGravity;			// Gravity vector
-	ci::Vec3f		mDefaultGravity;	// The default Gravity vector, in case you want to mess with gravity
-	// but always be able to get back to the original condition.
-	bool			mIsGravityOn;		// For turning Gravity on and off
 };

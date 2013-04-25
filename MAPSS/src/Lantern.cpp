@@ -20,7 +20,6 @@ Lantern::Lantern( const Vec3f &pos )
 	mRadiusDest	= Rand::randFloat( 4.5f, 7.5f );
 	if( Rand::randFloat() < 0.1f ) mRadiusDest = Rand::randFloat( 13.0f, 25.0f );
 	
-	mFallSpeed	= Rand::randFloat( -0.5f, -0.15f );
 	mColor		= Color( CM_HSV, Rand::randFloat( 0.0f, 0.1f ), 0.9f, 1.0f );
 	mIsDead		= false;
 	mIsDying	= false;
@@ -29,17 +28,6 @@ Lantern::Lantern( const Vec3f &pos )
 }
 
 void Lantern::update( float dt, float yFloor ){
-	mPos += Vec3f( 0.0f, mFallSpeed * dt, 0.0f );
-	if( ( mPos.y + mRadiusDest ) < yFloor ){
-		mIsSinking = true;
-		mIsDying = true;
-	}
-	
-	
-	if( mIsSinking ){
-		mVisiblePer = 1.0f - ( ( mPos.y + mRadiusDest ) - yFloor ) / ( mRadius + mRadius );
-	}
-	
 	
 	if( mIsDying ){
 		mRadius -= ( mRadius - 0.0f ) * 0.2f;
