@@ -73,16 +73,7 @@ void Controller::update()
 			++it;
 		}
 	}
-	
-	// ADD LANTERN IF REQUIRED
-	mNumLanterns = mLanterns.size();
-	if( mRoom->isPowerOn() ){
-		if( ( Rand::randFloat() < 0.00175f && mNumLanterns < 3 ) || mNumLanterns < 1 ){
-			addLantern( mRoom->getRandCeilingPos() );
-		}
-	}
-	
-	
+
 	// SORT LANTERNS
 	sort( mLanterns.begin(), mLanterns.end(), depthSortFunc );
 }

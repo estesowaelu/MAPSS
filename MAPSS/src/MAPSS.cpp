@@ -755,11 +755,11 @@ void MAPSS::mouseWheel( MouseEvent event )
 
 void MAPSS::keyDown( KeyEvent event )
 {
-	if( event.getChar() == ' ' ){
-		mRoom.togglePower();
-	} else if( event.getChar() == 'l' ){
-		mController.addLantern( mRoom.getRandCeilingPos() );
-	}
+//	if( event.getChar() == ' ' ){
+//		mRoom.togglePower();
+//	} else if( event.getChar() == 'l' ){
+//		mController.addLantern( mRoom.getRandCeilingPos() );
+//	}
 }
 
 void MAPSS::update()

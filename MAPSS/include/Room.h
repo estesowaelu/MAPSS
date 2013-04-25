@@ -34,7 +34,6 @@ public:
 	float		getTimeDelta();
 	bool		getTick();
 	
-	void		togglePower(){		mIsPowerOn = !mIsPowerOn;		};
 	float		getPower(){			return mPower;					};
 	bool		isPowerOn(){		return mIsPowerOn;				};
 	
