@@ -17,8 +17,8 @@ public:
 	Room();
 	Room( const ci::Vec3f &dims, bool isPowerOn );
 	void		init();
-	void		updateTime( bool saveFrames );
-	void		update( bool saveFrames );
+	void		updateTime();
+	void		update();
 	void		draw();
 	
 	void		setDims( const ci::Vec3f &dims ){ mDims = dims; };

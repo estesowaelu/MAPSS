@@ -135,9 +135,6 @@ public:
 	// MOUSE
 	Vec2f				mMousePos, mMouseDownPos, mMouseOffset;
 	
-	bool				mSaveFrames;
-	int					mNumSavedFrames;
-	
 	bool				mInitUpdateCalled;
 	
 private:
@@ -267,10 +264,7 @@ void MAPSS::setup()
 	mMouseDownPos		= Vec2f::zero();
 	mMouseOffset		= Vec2f::zero();
 	mMousePressed		= false;
-	
-	mSaveFrames			= false;
-	mNumSavedFrames		= 0;
-	
+		
 	mInitUpdateCalled	= false;
 	
 	gl::disableVerticalSync(); //required for higher than 60fps
@@ -754,7 +748,7 @@ void MAPSS::update()
 	}
 	
 	// ROOM
-	mRoom.update( mSaveFrames );
+	mRoom.update();
 	
 	// CONTROLLER
 	mController.update();

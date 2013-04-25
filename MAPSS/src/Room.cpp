@@ -121,8 +121,7 @@ void Room::init()
 	mVbo.unbindBuffers();
 }
 
-void Room::updateTime( bool saveFrames )
-{
+void Room::updateTime() {
 	float prevTime	= mTime;
 	mTime			= (float)app::getElapsedSeconds();
 	float dt		= mTime - prevTime;
@@ -137,9 +136,8 @@ void Room::updateTime( bool saveFrames )
 	}
 }
 
-void Room::update( bool saveFrames )
-{
-	updateTime( saveFrames );
+void Room::update() {
+	updateTime();
 	
 	if( mIsPowerOn )	mPower -= ( mPower - 1.0f ) * 0.2f;
 	else				mPower -= ( mPower - 0.0f ) * 0.2f;
