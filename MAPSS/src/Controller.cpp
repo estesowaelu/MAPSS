@@ -33,6 +33,8 @@ void Controller::update() {
 		}
 	}
 
+	mNumLanterns = mLanterns.size();
+
 	// SORT LANTERNS
 	sort( mLanterns.begin(), mLanterns.end(), depthSortFunc );
 }
