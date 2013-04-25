@@ -1,3 +1,12 @@
+//
+//  Main.cpp
+//  MAPSS
+//
+//  Created by Robert Hodgin
+//
+//  Edited by Tim Honeywell in Spring 2013
+//
+
 #include <vector>
 #include <boost/thread.hpp>
 

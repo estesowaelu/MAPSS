@@ -1,9 +1,10 @@
 //
 //  Room.cpp
-//  Stillness
+//  MAPSS
 //
 //  Created by Robert Hodgin on 12/20/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//
+//  Edited by Tim Honeywell in Spring 2013
 //
 
 #include "cinder/app/AppBasic.h"

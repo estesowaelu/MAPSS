@@ -1,9 +1,10 @@
 //
 //  Controller.h
-//  Flocking
+//  MAPSS
 //
 //  Created by Robert Hodgin on 4/26/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+//  Edited by Tim Honeywell in Spring 2013
 //
 
 #pragma once

@@ -1,8 +1,11 @@
 //
 //  Room.h
-//  Stillness
+//  MAPSS
 //
 //  Created by Robert Hodgin on 01/01/12.
+//
+//  Edited by Tim Honeywell in Spring 2013
+//
 
 
 #pragma once
