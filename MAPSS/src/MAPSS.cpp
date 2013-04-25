@@ -169,13 +169,13 @@ void MAPSS::processGestures() {
 			ci::Vec3f eLoc = normalizeCoords(tap.position());
             console() << tap.position() << "\n"; console() << eLoc << "\n";
             Color lcolor = Color( 255, 255, 0 );
-			mController.addLantern(eLoc, lcolor);
+			mController.addLantern(eLoc, lcolor, 0);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_KEY_TAP) {
             /////////// key-taps should place red pyramids /////////////
 			Leap::KeyTapGesture tap = gestures[i];
 			ci::Vec3f eLoc = normalizeCoords(tap.position());
             Color lcolor = Color( 255, 0, 0 );
-			mController.addLantern(eLoc, lcolor);
+			mController.addLantern(eLoc, lcolor, -1);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_CIRCLE) {
             ///////// Circles should place blue spheres ///////////////
 			Leap::CircleGesture circle = gestures[i];
@@ -183,7 +183,7 @@ void MAPSS::processGestures() {
 			if (progress >= 1.0f) {
 				ci::Vec3f eLoc = normalizeCoords(circle.center());
                 Color lcolor = Color( 0, 0, 255 );
-                mController.addLantern(eLoc, lcolor);
+                mController.addLantern(eLoc, lcolor, 1);
 			}
 		}
     }

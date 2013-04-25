@@ -19,7 +19,7 @@ Controller::Controller() {}
 
 Controller::Controller( Room *room, int maxLanterns ) {
 	mRoom			= room;
-	mMaxLanterns	= maxLanterns;	
+	mMaxLanterns	= maxLanterns;
 }
 
 void Controller::update() {
@@ -54,9 +54,9 @@ void Controller::drawLanternGlows( const Vec3f &right, const Vec3f &up ) {
 	}
 }
 
-void Controller::addLantern( const Vec3f &pos, Color col ) {
+void Controller::addLantern( const Vec3f &pos, Color col, int vid ) {
 	if( mNumLanterns < mMaxLanterns ){
-		mLanterns.push_back( Lantern( pos, col ) );
+		mLanterns.push_back( Lantern( pos, col, vid ) );
 	}
 }
 

@@ -14,7 +14,7 @@
 class Lantern {
   public:
 	Lantern();
-	Lantern( const ci::Vec3f &pos, ci::Color col );
+	Lantern( const ci::Vec3f &pos, ci::Color col, int vid );
 	void update( float dt, float yFloor );
 	void draw();
 	
@@ -22,6 +22,7 @@ class Lantern {
 	float		mRadius;
 	float		mRadiusDest;
     int         deathTimer;
+    int         vID;
 	ci::Color	mColor;
 	
 	float		mVisiblePer;

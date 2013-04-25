@@ -13,7 +13,7 @@
 
 using namespace ci;
 
-Lantern::Lantern( const Vec3f &pos, Color col ) {
+Lantern::Lantern( const Vec3f &pos, Color col, int vid ) {
 	mPos		= pos;
 	mRadius		= 0.0f;
 	mRadiusDest	= Rand::randFloat( 4.5f, 7.5f );
@@ -23,6 +23,7 @@ Lantern::Lantern( const Vec3f &pos, Color col ) {
 	mIsDead		= false;
 	mIsDying	= false;
     deathTimer  = 1800;
+    vID         = vid;
 	
 	mVisiblePer	= 1.0f;
 }
