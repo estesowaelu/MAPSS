@@ -63,10 +63,10 @@ public:
 	void				initialize();
 	void				setFboPositions( gl::Fbo fbo );
 	void				setFboVelocities( gl::Fbo fbo );
-	void				setPredatorFboPositions( gl::Fbo fbo );
-	void				setPredatorFboVelocities( gl::Fbo fbo );
+//	void				setPredatorFboPositions( gl::Fbo fbo );
+//	void				setPredatorFboVelocities( gl::Fbo fbo );
 	void				initVbo();
-	void				initPredatorVbo();
+//	void				initPredatorVbo();
 	virtual void		mouseDown( MouseEvent event );
 	virtual void		mouseUp( MouseEvent event );
 	virtual void		mouseMove( MouseEvent event );
@@ -78,8 +78,8 @@ public:
 	void				drawInfoPanel();
 	void				drawIntoVelocityFbo();
 	void				drawIntoPositionFbo();
-	void				drawIntoPredatorVelocityFbo();
-	void				drawIntoPredatorPositionFbo();
+//	void				drawIntoPredatorVelocityFbo();
+//	void				drawIntoPredatorPositionFbo();
 	void				drawIntoLanternsFbo();
 	virtual void		draw();
 	
@@ -295,13 +295,13 @@ void MAPSS::initialize() {
 	mP_VelocityFbos[0]	= gl::Fbo( mP_FboDim, mP_FboDim, mRgba16Format );
 	mP_VelocityFbos[1]	= gl::Fbo( mP_FboDim, mP_FboDim, mRgba16Format );
 	
-	setPredatorFboPositions( mP_PositionFbos[0] );
-	setPredatorFboPositions( mP_PositionFbos[1] );
-	setPredatorFboVelocities( mP_VelocityFbos[0] );
-	setPredatorFboVelocities( mP_VelocityFbos[1] );
+//	setPredatorFboPositions( mP_PositionFbos[0] );
+//	setPredatorFboPositions( mP_PositionFbos[1] );
+//	setPredatorFboVelocities( mP_VelocityFbos[0] );
+//	setPredatorFboVelocities( mP_VelocityFbos[1] );
 	
 	initVbo();
-	initPredatorVbo();
+//	initPredatorVbo();
 }
 
 void MAPSS::setFboPositions( gl::Fbo fbo ) {
@@ -359,6 +359,7 @@ void MAPSS::setFboVelocities( gl::Fbo fbo ) {
 	fbo.unbindFramebuffer();
 }
 
+/*
 void MAPSS::setPredatorFboPositions( gl::Fbo fbo ) {
 	// PREDATOR POSITION
 	Surface32f posSurface( fbo.getTexture() );
@@ -380,7 +381,8 @@ void MAPSS::setPredatorFboPositions( gl::Fbo fbo ) {
 	gl::draw( posTexture );
 	fbo.unbindFramebuffer();
 }
-
+ */
+/*
 void MAPSS::setPredatorFboVelocities( gl::Fbo fbo ) {
 	// PREDATOR VELOCITY
 	Surface32f velSurface( fbo.getTexture() );
@@ -402,6 +404,7 @@ void MAPSS::setPredatorFboVelocities( gl::Fbo fbo ) {
 	gl::draw( velTexture );
 	fbo.unbindFramebuffer();
 }
+*/
 
 void MAPSS::initVbo() {
 	gl::VboMesh::Layout layout;
@@ -531,7 +534,7 @@ void MAPSS::initVbo() {
 	mVboMesh.bufferNormals( normals );
 	mVboMesh.unbindBuffers();
 }
-
+/*
 void MAPSS::initPredatorVbo() {
 	gl::VboMesh::Layout layout;
 	layout.setStaticPositions();
@@ -660,7 +663,7 @@ void MAPSS::initPredatorVbo() {
 	mP_VboMesh.bufferNormals( normals );
 	mP_VboMesh.unbindBuffers();
 }
-
+*/
 
 void MAPSS::mouseDown( MouseEvent event ) {
 	mMouseDownPos = event.getPos();
@@ -720,8 +723,8 @@ void MAPSS::update() {
 
 	drawIntoVelocityFbo();
 	drawIntoPositionFbo();
-	drawIntoPredatorVelocityFbo();
-	drawIntoPredatorPositionFbo();
+//	drawIntoPredatorVelocityFbo();
+//	drawIntoPredatorPositionFbo();
 	drawIntoRoomFbo();
 	drawIntoLanternsFbo();
 }
@@ -743,7 +746,7 @@ void MAPSS::drawIntoVelocityFbo() {
 	mVelocityShader.bind();
 	mVelocityShader.uniform( "positionTex", 0 );
 	mVelocityShader.uniform( "velocityTex", 1 );
-	mVelocityShader.uniform( "predatorPositionTex", 2 );
+//	mVelocityShader.uniform( "predatorPositionTex", 2 );
 	mVelocityShader.uniform( "lanternsTex", 3 );
 	mVelocityShader.uniform( "numLights", (float)mController.mNumLanterns );
 	mVelocityShader.uniform( "invNumLights", 1.0f/(float)MAX_LANTERNS );
@@ -782,7 +785,8 @@ void MAPSS::drawIntoPositionFbo() {
 }
 
 // PREDATOR VELOCITY
-void MAPSS::drawIntoPredatorVelocityFbo() {
+/*
+ void MAPSS::drawIntoPredatorVelocityFbo() {
 	gl::setMatricesWindow( mP_FboSize, false );
 	gl::setViewport( mP_FboBounds );
 	
@@ -834,7 +838,7 @@ void MAPSS::drawIntoPredatorPositionFbo() {
 	
 	mP_PositionFbos[ mThisFbo ].unbindFramebuffer();
 }
-
+*/
 void MAPSS::drawIntoRoomFbo() {
 	gl::setMatricesWindow( mRoomFbo.getSize(), false );
 	gl::setViewport( mRoomFbo.getBounds() );
@@ -918,7 +922,7 @@ void MAPSS::draw() {
 	gl::draw( mVboMesh );
 	mShader.unbind();
 	
-	// DRAW PREDATORS
+/*	// DRAW PREDATORS
 	mP_PositionFbos[mPrevFbo].bindTexture( 0 );
 	mP_PositionFbos[mThisFbo].bindTexture( 1 );
 	mP_VelocityFbos[mThisFbo].bindTexture( 2 );
@@ -935,7 +939,7 @@ void MAPSS::draw() {
 	mP_Shader.uniform( "eyePos", mSpringCam.mEye );
 	mP_Shader.uniform( "power", mRoom.getPower() );
 	gl::draw( mP_VboMesh );
-	mP_Shader.unbind();
+	mP_Shader.unbind();  */
 	
 	// DRAW LANTERN GLOWS
     gl::disableDepthWrite();
