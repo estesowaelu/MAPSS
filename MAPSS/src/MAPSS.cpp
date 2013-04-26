@@ -51,7 +51,6 @@ public:
 		leap.enableGesture( Leap::Gesture::TYPE_SCREEN_TAP );
 		leap.enableGesture( Leap::Gesture::TYPE_KEY_TAP );
 		leap.enableGesture( Leap::Gesture::TYPE_CIRCLE );
-		leap.enableGesture( Leap::Gesture::TYPE_SWIPE );
 	}
 };
 
@@ -207,7 +206,7 @@ Vec3f MAPSS::normalizeCoords(const Leap::Vector& vec) {
 void MAPSS::prepareSettings( Settings *settings ) {
 	settings->setWindowSize( APP_WIDTH, APP_HEIGHT );
 	settings->setFrameRate(120); //absurdly high on purpose
-	settings->setFullScreen(false);
+	settings->setFullScreen( false );
 //	settings->setBorderless();
 }
 

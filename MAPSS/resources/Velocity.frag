@@ -21,6 +21,7 @@ uniform float att;
 void reactToLanterns( inout vec3 acc, vec3 _myPos )
 {
 	float index = invNumLightsHalf;
+    
 	for( float i=0.0; i<numLights; i+=1.0 ){
 		vec4 LANTERN	= texture2D( lanternsTex, vec2( index, 0.25 ) );
 		vec3 pos		= LANTERN.xyz;
@@ -34,7 +35,9 @@ void reactToLanterns( inout vec3 acc, vec3 _myPos )
 		
 		// IF WITHIN THE ZONE, REACT TO THE LANTERN
 		if( distToLanternSqrd > minRad && distToLanternSqrd < maxRad ){
-			acc -= normalize( dirToLantern ) * ( ( maxRad - minRad ) / distToLanternSqrd ) * 0.01075 * dt;
+//            if ( jkdlsaf )  // if blah, move towards, else move away
+                acc -= normalize( dirToLantern ) * ( ( maxRad - minRad ) / distToLanternSqrd ) * 0.01075 * dt;
+//            else acc += normalize( dirToLantern ) * ( ( maxRad - minRad ) / distToLanternSqrd ) * 0.01075 * dt;
 		}
 		
 		// IF TOO CLOSE, MOVE AWAY MORE RAPIDLY
@@ -45,7 +48,9 @@ void reactToLanterns( inout vec3 acc, vec3 _myPos )
 	}
 }
 
-
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
 
 void reactToPredators( inout vec3 acc, inout float crowded, vec3 fishPos )
 {	
