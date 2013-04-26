@@ -84,6 +84,8 @@ public:
 	virtual void		draw();
 	
 	void processGestures();
+    bool hasDroppedRecently;
+    int dropTimer;
 
 	Vec3f normalizeCoords(const Leap::Vector& vec);
 	
@@ -146,18 +148,20 @@ private:
 };
 
 //Handle Leap Gesture processing.
-//Trigger the corresponding effects in the particle field.
 void MAPSS::processGestures() {
+    if (dropTimer > 0) {
+        dropTimer--;
+        return;
+    }
+    
 	Leap::Frame frame = controller.frame();
-	
 	if ( lastFrame == frame ) {
 		return;
 	}
-	
+
 	Leap::GestureList gestures =  lastFrame.isValid()       ?
 	frame.gestures(lastFrame) :
 	frame.gestures();
-	
 	lastFrame = frame;
 	
 	size_t numGestures = gestures.count();
@@ -169,12 +173,14 @@ void MAPSS::processGestures() {
 			ci::Vec3f eLoc = normalizeCoords(tap.position());
             console() << tap.position() << "\n"; console() << eLoc << "\n";
             Color lcolor = Color( 255, 255, 0 );
+            dropTimer = 90;
 			mController.addLantern(eLoc, lcolor, 0);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_KEY_TAP) {
             /////////// key-taps should place red pyramids /////////////
 			Leap::KeyTapGesture tap = gestures[i];
 			ci::Vec3f eLoc = normalizeCoords(tap.position());
             Color lcolor = Color( 255, 0, 0 );
+            dropTimer = 90;
 			mController.addLantern(eLoc, lcolor, -1);
 		} else if (gestures[i].type() == Leap::Gesture::TYPE_CIRCLE) {
             ///////// Circles should place blue spheres ///////////////
@@ -183,6 +189,7 @@ void MAPSS::processGestures() {
 			if (progress >= 1.0f) {
 				ci::Vec3f eLoc = normalizeCoords(circle.center());
                 Color lcolor = Color( 0, 0, 255 );
+                dropTimer = 90;
                 mController.addLantern(eLoc, lcolor, 1);
 			}
 		}
@@ -260,6 +267,8 @@ void MAPSS::setup() {
 	mMousePressed		= false;
 		
 	mInitUpdateCalled	= false;
+    
+    dropTimer = 0;
 	
 	gl::disableVerticalSync(); //required for higher than 60fps
 	
