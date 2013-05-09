@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.icns</string>
+	<string>iconFlocking</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.libcinder.Flocking</string>
 	<key>CFBundleInfoDictionaryVersion</key>

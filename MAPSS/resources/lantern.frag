@@ -36,8 +36,6 @@ void main()
 	float fres			= ppEyeFres * 0.2;
 	float centerGlow	= ppEyeDiff * 0.2;
 	
-	
-//	vec3 litRoomColor	= vec3( 1.0 - ppEyeFres * 0.2 ) * vec3( fakeAo * shine + centerGlow * fakeAo - topShadow + rimLight * 2.0 );
 	vec3 litRoomColor	= vec3( color );
 	vec3 darkRoomColor	= vec3( color );
 	

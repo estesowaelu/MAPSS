@@ -15,16 +15,10 @@
 		00B784B60FF439BC000DE1D7 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B784B20FF439BC000DE1D7 /* CoreAudio.framework */; };
 		00BAE65A0E7ED9C10018A608 /* MAPSS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00BAE6590E7ED9C10018A608 /* MAPSS.cpp */; };
 		22DAFE85170083CF004ECFC4 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DAFE84170083CF004ECFC4 /* libLeap.dylib */; };
-		22DAFE881700849A004ECFC4 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22DAFE8617008433004ECFC4 /* libLeap.dylib */; };
 		5323E6B20EAFCA74003A9687 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B10EAFCA74003A9687 /* CoreVideo.framework */; };
 		5323E6B60EAFCA7E003A9687 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5323E6B50EAFCA7E003A9687 /* QTKit.framework */; };
 		53E3CDFC0E86099300238D2B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3CDFB0E86099300238D2B /* Carbon.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		E11993BB155DBC7D002AFBCF /* icons.png in Resources */ = {isa = PBXBuildFile; fileRef = E11993B8155DBC7D002AFBCF /* icons.png */; };
-		E1202EF215736825006A09D2 /* iconFlocking.png in Resources */ = {isa = PBXBuildFile; fileRef = E1202EF115736825006A09D2 /* iconFlocking.png */; };
-		E1234CE3155DD5F900B0C8FD /* P_Velocity.frag in Resources */ = {isa = PBXBuildFile; fileRef = E1234CE2155DD5F900B0C8FD /* P_Velocity.frag */; };
-		E1234CE6155DD60C00B0C8FD /* P_Position.frag in Resources */ = {isa = PBXBuildFile; fileRef = E1234CE5155DD60C00B0C8FD /* P_Position.frag */; };
-		E1234CE8155DD94A00B0C8FD /* P_VboPos.vert in Resources */ = {isa = PBXBuildFile; fileRef = E1234CE7155DD94A00B0C8FD /* P_VboPos.vert */; };
 		E13C27BE154E17350087EB10 /* Position.frag in Resources */ = {isa = PBXBuildFile; fileRef = E13C27BA154E17350087EB10 /* Position.frag */; };
 		E13C27BF154E17350087EB10 /* VboPos.frag in Resources */ = {isa = PBXBuildFile; fileRef = E13C27BB154E17350087EB10 /* VboPos.frag */; };
 		E13C27C0154E17350087EB10 /* VboPos.vert in Resources */ = {isa = PBXBuildFile; fileRef = E13C27BC154E17350087EB10 /* VboPos.vert */; };
@@ -40,9 +34,6 @@
 		E19E0283154E6E8A00CB2230 /* lanternGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = E19E0282154E6E8A00CB2230 /* lanternGlow.png */; };
 		E1AE00E7153D0B02000CE780 /* passThru.vert in Resources */ = {isa = PBXBuildFile; fileRef = E1AE00E6153D0B02000CE780 /* passThru.vert */; };
 		E1AE00EC153D0C32000CE780 /* passThruNormals.vert in Resources */ = {isa = PBXBuildFile; fileRef = E1AE00EB153D0C32000CE780 /* passThruNormals.vert */; };
-		E1DA84F2155F6D5B0063B184 /* Predator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1DA84F1155F6D5B0063B184 /* Predator.cpp */; };
-		E1DA84F4155F6E8D0063B184 /* P_VboPos.frag in Resources */ = {isa = PBXBuildFile; fileRef = E1DA84F3155F6E8D0063B184 /* P_VboPos.frag */; };
-		E1FF62321574702D00C1A823 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E1FF62311574702D00C1A823 /* icon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				22DAFE881700849A004ECFC4 /* libLeap.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,7 +59,6 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		22DAFE84170083CF004ECFC4 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../../../../lib/LeapSDK/lib/libLeap.dylib; sourceTree = "<group>"; };
-		22DAFE8617008433004ECFC4 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../../../../lib/LeapSDK/lib/libLeap.dylib; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* MAPSS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPSS_Prefix.pch; sourceTree = "<group>"; };
@@ -78,11 +67,6 @@
 		53E3CDFB0E86099300238D2B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MAPSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MAPSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E11993B8155DBC7D002AFBCF /* icons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icons.png; path = ../resources/icons.png; sourceTree = "<group>"; };
-		E1202EF115736825006A09D2 /* iconFlocking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconFlocking.png; path = ../resources/iconFlocking.png; sourceTree = "<group>"; };
-		E1234CE2155DD5F900B0C8FD /* P_Velocity.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = P_Velocity.frag; path = ../resources/P_Velocity.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		E1234CE5155DD60C00B0C8FD /* P_Position.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = P_Position.frag; path = ../resources/P_Position.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		E1234CE7155DD94A00B0C8FD /* P_VboPos.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = P_VboPos.vert; path = ../resources/P_VboPos.vert; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		E13C27BA154E17350087EB10 /* Position.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Position.frag; path = ../resources/Position.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		E13C27BB154E17350087EB10 /* VboPos.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = VboPos.frag; path = ../resources/VboPos.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		E13C27BC154E17350087EB10 /* VboPos.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = VboPos.vert; path = ../resources/VboPos.vert; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
@@ -103,10 +87,6 @@
 		E1A2E0F9154CCA40007A956C /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Resources.h; path = ../include/Resources.h; sourceTree = "<group>"; };
 		E1AE00E6153D0B02000CE780 /* passThru.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = passThru.vert; path = ../resources/passThru.vert; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		E1AE00EB153D0C32000CE780 /* passThruNormals.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = passThruNormals.vert; path = ../resources/passThruNormals.vert; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		E1DA84F0155F6CC20063B184 /* Predator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Predator.h; path = ../include/Predator.h; sourceTree = "<group>"; };
-		E1DA84F1155F6D5B0063B184 /* Predator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Predator.cpp; path = ../src/Predator.cpp; sourceTree = "<group>"; };
-		E1DA84F3155F6E8D0063B184 /* P_VboPos.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = P_VboPos.frag; path = ../resources/P_VboPos.frag; sourceTree = "<group>"; };
-		E1FF62311574702D00C1A823 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../resources/icon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +118,6 @@
 				00BAE6590E7ED9C10018A608 /* MAPSS.cpp */,
 				E19E0276154E667400CB2230 /* Controller.cpp */,
 				E19E0277154E667400CB2230 /* Room.cpp */,
-				E1DA84F1155F6D5B0063B184 /* Predator.cpp */,
 				E19E0275154E667400CB2230 /* Lantern.cpp */,
 			);
 			name = Source;
@@ -182,7 +161,6 @@
 		29B97314FDCFA39411CA2CEA /* GpuPhysics */ = {
 			isa = PBXGroup;
 			children = (
-				22DAFE8617008433004ECFC4 /* libLeap.dylib */,
 				29B97315FDCFA39411CA2CEA /* Headers */,
 				080E96DDFE201D6D7F000001 /* Source */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -198,7 +176,6 @@
 				E1A2E0E8154CC9A1007A956C /* Utility */,
 				E19E027C154E667D00CB2230 /* Controller.h */,
 				E19E027D154E667D00CB2230 /* Room.h */,
-				E1DA84F0155F6CC20063B184 /* Predator.h */,
 				E19E027B154E667D00CB2230 /* Lantern.h */,
 			);
 			name = Headers;
@@ -210,7 +187,6 @@
 				E1A2E0D4154CBDFD007A956C /* Images */,
 				E149FFEB15491744007C6AE9 /* Shaders */,
 				8D1107310486CEB800E47090 /* Info.plist */,
-				E1FF62311574702D00C1A823 /* icon.icns */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -234,10 +210,6 @@
 				E13C27BA154E17350087EB10 /* Position.frag */,
 				E13C27BC154E17350087EB10 /* VboPos.vert */,
 				E13C27BB154E17350087EB10 /* VboPos.frag */,
-				E1234CE2155DD5F900B0C8FD /* P_Velocity.frag */,
-				E1234CE5155DD60C00B0C8FD /* P_Position.frag */,
-				E1234CE7155DD94A00B0C8FD /* P_VboPos.vert */,
-				E1DA84F3155F6E8D0063B184 /* P_VboPos.frag */,
 				E149FFED15491867007C6AE9 /* room.vert */,
 				E149FFEC15491867007C6AE9 /* room.frag */,
 				E1AE00E6153D0B02000CE780 /* passThru.vert */,
@@ -249,8 +221,6 @@
 		E1A2E0D4154CBDFD007A956C /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E1202EF115736825006A09D2 /* iconFlocking.png */,
-				E11993B8155DBC7D002AFBCF /* icons.png */,
 				E19E0282154E6E8A00CB2230 /* lanternGlow.png */,
 			);
 			name = Images;
@@ -331,18 +301,11 @@
 				E13C27BE154E17350087EB10 /* Position.frag in Resources */,
 				E13C27BF154E17350087EB10 /* VboPos.frag in Resources */,
 				E13C27C0154E17350087EB10 /* VboPos.vert in Resources */,
-				E1234CE3155DD5F900B0C8FD /* P_Velocity.frag in Resources */,
-				E1234CE6155DD60C00B0C8FD /* P_Position.frag in Resources */,
-				E1234CE8155DD94A00B0C8FD /* P_VboPos.vert in Resources */,
-				E1DA84F4155F6E8D0063B184 /* P_VboPos.frag in Resources */,
 				E149FFEE15491867007C6AE9 /* room.frag in Resources */,
 				E149FFEF15491867007C6AE9 /* room.vert in Resources */,
 				E154E0BC154FCE6D0032FD67 /* lantern.vert in Resources */,
 				E154E0BB154FCE6D0032FD67 /* lantern.frag in Resources */,
-				E11993BB155DBC7D002AFBCF /* icons.png in Resources */,
 				E19E0283154E6E8A00CB2230 /* lanternGlow.png in Resources */,
-				E1202EF215736825006A09D2 /* iconFlocking.png in Resources */,
-				E1FF62321574702D00C1A823 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +321,6 @@
 				E19E0278154E667400CB2230 /* Lantern.cpp in Sources */,
 				E19E0279154E667400CB2230 /* Controller.cpp in Sources */,
 				E19E027A154E667400CB2230 /* Room.cpp in Sources */,
-				E1DA84F2155F6D5B0063B184 /* Predator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

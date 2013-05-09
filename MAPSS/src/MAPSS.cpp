@@ -62,10 +62,7 @@ public:
 	void				initialize();
 	void				setFboPositions( gl::Fbo fbo );
 	void				setFboVelocities( gl::Fbo fbo );
-//	void				setPredatorFboPositions( gl::Fbo fbo );
-//	void				setPredatorFboVelocities( gl::Fbo fbo );
 	void				initVbo();
-//	void				initPredatorVbo();
 	virtual void		mouseDown( MouseEvent event );
 	virtual void		mouseUp( MouseEvent event );
 	virtual void		mouseMove( MouseEvent event );
@@ -77,8 +74,6 @@ public:
 	void				drawInfoPanel();
 	void				drawIntoVelocityFbo();
 	void				drawIntoPositionFbo();
-//	void				drawIntoPredatorVelocityFbo();
-//	void				drawIntoPredatorPositionFbo();
 	void				drawIntoLanternsFbo();
 	virtual void		draw();
 	
@@ -205,9 +200,8 @@ Vec3f MAPSS::normalizeCoords(const Leap::Vector& vec) {
 
 void MAPSS::prepareSettings( Settings *settings ) {
 	settings->setWindowSize( APP_WIDTH, APP_HEIGHT );
-	settings->setFrameRate(120); //absurdly high on purpose
-	settings->setFullScreen( false );
-//	settings->setBorderless();
+	settings->setFrameRate(120);
+	settings->setFullScreen( true );
 }
 
 void MAPSS::setup() {
@@ -269,7 +263,7 @@ void MAPSS::setup() {
     
     dropTimer = 0;
 	
-	gl::disableVerticalSync(); //required for higher than 60fps
+	gl::disableVerticalSync();
 	
 	lastMousePos.set(0, 0);
 	controller.addListener( listener );
@@ -303,13 +297,7 @@ void MAPSS::initialize() {
 	mP_VelocityFbos[0]	= gl::Fbo( mP_FboDim, mP_FboDim, mRgba16Format );
 	mP_VelocityFbos[1]	= gl::Fbo( mP_FboDim, mP_FboDim, mRgba16Format );
 	
-//	setPredatorFboPositions( mP_PositionFbos[0] );
-//	setPredatorFboPositions( mP_PositionFbos[1] );
-//	setPredatorFboVelocities( mP_VelocityFbos[0] );
-//	setPredatorFboVelocities( mP_VelocityFbos[1] );
-	
 	initVbo();
-//	initPredatorVbo();
 }
 
 void MAPSS::setFboPositions( gl::Fbo fbo ) {
@@ -329,7 +317,7 @@ void MAPSS::setFboPositions( gl::Fbo fbo ) {
 			it.r() = p.x;
 			it.g() = p.y;
 			it.b() = p.z;
-			it.a() = Rand::randFloat( 0.7f, 1.0f );	// GENERAL EMOTIONAL STATE. 
+			it.a() = Rand::randFloat( 0.7f, 1.0f );
 		}
 	}
 	
@@ -367,53 +355,6 @@ void MAPSS::setFboVelocities( gl::Fbo fbo ) {
 	fbo.unbindFramebuffer();
 }
 
-/*
-void MAPSS::setPredatorFboPositions( gl::Fbo fbo ) {
-	// PREDATOR POSITION
-	Surface32f posSurface( fbo.getTexture() );
-	Surface32f::Iter it = posSurface.getIter();
-	while( it.line() ){
-		while( it.pixel() ){
-			Vec3f r = Rand::randVec3f() * 50.0f;
-			it.r() = r.x;
-			it.g() = r.y;
-			it.b() = r.z;
-			it.a() = Rand::randFloat( 0.7f, 1.0f );	// GENERAL EMOTIONAL STATE. 
-		}
-	}
-	
-	gl::Texture posTexture( posSurface );
-	fbo.bindFramebuffer();
-	gl::setMatricesWindow( mP_FboSize, false );
-	gl::setViewport( mP_FboBounds );
-	gl::draw( posTexture );
-	fbo.unbindFramebuffer();
-}
- */
-/*
-void MAPSS::setPredatorFboVelocities( gl::Fbo fbo ) {
-	// PREDATOR VELOCITY
-	Surface32f velSurface( fbo.getTexture() );
-	Surface32f::Iter it = velSurface.getIter();
-	while( it.line() ){
-		while( it.pixel() ){
-			Vec3f r = Rand::randVec3f() * 3.0f;
-			it.r() = r.x;
-			it.g() = r.y;
-			it.b() = r.z;
-			it.a() = 1.0f;
-		}
-	}
-	
-	gl::Texture velTexture( velSurface );
-	fbo.bindFramebuffer();
-	gl::setMatricesWindow( mP_FboSize, false );
-	gl::setViewport( mP_FboBounds );
-	gl::draw( velTexture );
-	fbo.unbindFramebuffer();
-}
-*/
-
 void MAPSS::initVbo() {
 	gl::VboMesh::Layout layout;
 	layout.setStaticPositions();
@@ -421,9 +362,6 @@ void MAPSS::initVbo() {
 	layout.setStaticNormals();
 	
 	int numVertices = mFboDim * mFboDim;
-	// 5 points make up the pyramid
-	// 8 triangles make up two pyramids
-	// 3 points per triangle
 	
 	mVboMesh		= gl::VboMesh( numVertices * 8 * 3, 0, layout, GL_TRIANGLES );
 	
@@ -542,136 +480,6 @@ void MAPSS::initVbo() {
 	mVboMesh.bufferNormals( normals );
 	mVboMesh.unbindBuffers();
 }
-/*
-void MAPSS::initPredatorVbo() {
-	gl::VboMesh::Layout layout;
-	layout.setStaticPositions();
-	layout.setStaticTexCoords2d();
-	layout.setStaticNormals();
-	
-	int numVertices = mP_FboDim * mP_FboDim;
-	// 5 points make up the pyramid
-	// 8 triangles make up two pyramids
-	// 3 points per triangle
-	
-	mP_VboMesh		= gl::VboMesh( numVertices * 8 * 3, 0, layout, GL_TRIANGLES );
-	
-	float s = 5.0f;
-	Vec3f p0( 0.0f, 0.0f, 3.0f );
-	Vec3f p1( -s*1.3f, 0.0f, 0.0f );
-	Vec3f p2( 0.0f, s * 0.5f, 0.0f );
-	Vec3f p3( s*1.3f, 0.0f, 0.0f );
-	Vec3f p4( 0.0f, -s * 0.5f, 0.0f );
-	Vec3f p5( 0.0f, 0.0f, -12.0f );
-	
-	Vec3f n;
-	
-	vector<Vec3f>		positions;
-	vector<Vec3f>		normals;
-	vector<Vec2f>		texCoords;
-	
-	for( int x = 0; x < mP_FboDim; ++x ) {
-		for( int y = 0; y < mP_FboDim; ++y ) {
-			float u = (float)x/(float)mP_FboDim;
-			float v = (float)y/(float)mP_FboDim;
-			Vec2f t = Vec2f( u, v );
-			
-			positions.push_back( p0 );
-			positions.push_back( p1 );
-			positions.push_back( p2 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p0 + p1 + p2 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-			
-			positions.push_back( p0 );
-			positions.push_back( p2 );
-			positions.push_back( p3 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p0 + p2 + p3 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-			
-			positions.push_back( p0 );
-			positions.push_back( p3 );
-			positions.push_back( p4 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p0 + p3 + p4 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-			
-			positions.push_back( p0 );
-			positions.push_back( p4 );
-			positions.push_back( p1 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p0 + p4 + p1 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-			
-			positions.push_back( p5 );
-			positions.push_back( p1 );
-			positions.push_back( p4 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p5 + p1 + p4 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-			
-			positions.push_back( p5 );
-			positions.push_back( p2 );
-			positions.push_back( p1 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p5 + p2 + p1 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-			
-			positions.push_back( p5 );
-			positions.push_back( p3 );
-			positions.push_back( p2 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p5 + p3 + p2 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-			
-			positions.push_back( p5 );
-			positions.push_back( p4 );
-			positions.push_back( p3 );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			texCoords.push_back( t );
-			n = ( p5 + p4 + p3 ).normalized();
-			normals.push_back( n );
-			normals.push_back( n );
-			normals.push_back( n );
-		}
-	}
-	
-	mP_VboMesh.bufferPositions( positions );
-	mP_VboMesh.bufferTexCoords2d( 0, texCoords );
-	mP_VboMesh.bufferNormals( normals );
-	mP_VboMesh.unbindBuffers();
-}
-*/
 
 void MAPSS::mouseDown( MouseEvent event ) {
 	mMouseDownPos = event.getPos();
@@ -699,9 +507,6 @@ void MAPSS::mouseWheel( MouseEvent event ) {
 }
 
 void MAPSS::keyDown( KeyEvent event ) {
-//	if( event.getChar() == ' ' ){
-//		mRoom.togglePower();
-//	}
 }
 
 void MAPSS::update() {
@@ -731,8 +536,6 @@ void MAPSS::update() {
 
 	drawIntoVelocityFbo();
 	drawIntoPositionFbo();
-//	drawIntoPredatorVelocityFbo();
-//	drawIntoPredatorPositionFbo();
 	drawIntoRoomFbo();
 	drawIntoLanternsFbo();
 }
@@ -754,7 +557,6 @@ void MAPSS::drawIntoVelocityFbo() {
 	mVelocityShader.bind();
 	mVelocityShader.uniform( "positionTex", 0 );
 	mVelocityShader.uniform( "velocityTex", 1 );
-//	mVelocityShader.uniform( "predatorPositionTex", 2 );
 	mVelocityShader.uniform( "lanternsTex", 3 );
 	mVelocityShader.uniform( "numLights", (float)mController.mNumLanterns );
 	mVelocityShader.uniform( "invNumLights", 1.0f/(float)MAX_LANTERNS );
@@ -792,61 +594,6 @@ void MAPSS::drawIntoPositionFbo() {
 	mPositionFbos[ mThisFbo ].unbindFramebuffer();
 }
 
-// PREDATOR VELOCITY
-/*
- void MAPSS::drawIntoPredatorVelocityFbo() {
-	gl::setMatricesWindow( mP_FboSize, false );
-	gl::setViewport( mP_FboBounds );
-	
-	mP_VelocityFbos[ mThisFbo ].bindFramebuffer();
-	gl::clear( ColorA( 0, 0, 0, 0 ) );
-	
-	mP_PositionFbos[ mPrevFbo ].bindTexture( 0 );
-	mP_VelocityFbos[ mPrevFbo ].bindTexture( 1 );
-	mPositionFbos[ mPrevFbo ].bindTexture( 2 );
-	mLanternsFbo.bindTexture( 3 );
-	mP_VelocityShader.bind();
-	mP_VelocityShader.uniform( "positionTex", 0 );
-	mP_VelocityShader.uniform( "velocityTex", 1 );
-	mP_VelocityShader.uniform( "preyPositionTex", 2 );
-	mP_VelocityShader.uniform( "lanternsTex", 3 );
-	mP_VelocityShader.uniform( "numLights", (float)mController.mNumLanterns );
-	mP_VelocityShader.uniform( "invNumLights", 1.0f/(float)MAX_LANTERNS );
-	mP_VelocityShader.uniform( "invNumLightsHalf", 1.0f/(float)MAX_LANTERNS * 0.5f );
-	mP_VelocityShader.uniform( "att", 1.015f );
-	mP_VelocityShader.uniform( "roomBounds", mRoom.getDims() );
-	mP_VelocityShader.uniform( "fboDim", mP_FboDim );
-	mP_VelocityShader.uniform( "invFboDim", 1.0f/(float)mP_FboDim );
-	mP_VelocityShader.uniform( "preyFboDim", mFboDim );
-	mP_VelocityShader.uniform( "invPreyFboDim", 1.0f/(float)mFboDim );
-	
-	mP_VelocityShader.uniform( "dt", mRoom.mTimeAdjusted );
-	mP_VelocityShader.uniform( "power", mRoom.getPower() );
-	gl::drawSolidRect( mP_FboBounds );
-	mP_VelocityShader.unbind();
-	
-	mP_VelocityFbos[ mThisFbo ].unbindFramebuffer();
-}
-
-// PREDATOR POSITION
-void MAPSS::drawIntoPredatorPositionFbo() {
-	gl::setMatricesWindow( mP_FboSize, false );
-	gl::setViewport( mP_FboBounds );
-	
-	mP_PositionFbos[ mThisFbo ].bindFramebuffer();
-	mP_PositionFbos[ mPrevFbo ].bindTexture( 0 );
-	mP_VelocityFbos[ mThisFbo ].bindTexture( 1 );
-	
-	mP_PositionShader.bind();
-	mP_PositionShader.uniform( "position", 0 );
-	mP_PositionShader.uniform( "velocity", 1 );
-	mP_PositionShader.uniform( "dt", mRoom.mTimeAdjusted );
-	gl::drawSolidRect( mP_FboBounds );
-	mP_PositionShader.unbind();
-	
-	mP_PositionFbos[ mThisFbo ].unbindFramebuffer();
-}
-*/
 void MAPSS::drawIntoRoomFbo() {
 	gl::setMatricesWindow( mRoomFbo.getSize(), false );
 	gl::setViewport( mRoomFbo.getBounds() );
@@ -930,25 +677,6 @@ void MAPSS::draw() {
 	gl::draw( mVboMesh );
 	mShader.unbind();
 	
-/*	// DRAW PREDATORS
-	mP_PositionFbos[mPrevFbo].bindTexture( 0 );
-	mP_PositionFbos[mThisFbo].bindTexture( 1 );
-	mP_VelocityFbos[mThisFbo].bindTexture( 2 );
-	mLanternsFbo.bindTexture( 3 );
-	mP_Shader.bind();
-	mP_Shader.uniform( "prevPosition", 0 );
-	mP_Shader.uniform( "currentPosition", 1 );
-	mP_Shader.uniform( "currentVelocity", 2 );
-	mP_Shader.uniform( "lightsTex", 3 );
-	mP_Shader.uniform( "numLights", (float)mController.mNumLanterns );
-	mP_Shader.uniform( "invNumLights", 1.0f/(float)MAX_LANTERNS );
-	mP_Shader.uniform( "invNumLightsHalf", 1.0f/(float)MAX_LANTERNS * 0.5f );
-	mP_Shader.uniform( "att", 1.05f );
-	mP_Shader.uniform( "eyePos", mSpringCam.mEye );
-	mP_Shader.uniform( "power", mRoom.getPower() );
-	gl::draw( mP_VboMesh );
-	mP_Shader.unbind();  */
-	
 	// DRAW LANTERN GLOWS
     gl::disableDepthWrite();
     gl::enableAdditiveBlending();
@@ -974,7 +702,8 @@ void MAPSS::draw() {
 	gl::disableDepthWrite();
 	gl::enableAlphaBlending();
 	
-	if( false ){	// DRAW POSITION AND VELOCITY FBOS
+    // DRAW POSITION AND VELOCITY FBOS
+	if( false ){
 		gl::color( Color::white() );
 		gl::setMatricesWindow( getWindowSize() );
 		gl::enable( GL_TEXTURE_2D );

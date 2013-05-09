@@ -1,4 +1,3 @@
-
 varying vec4 vVertex;
 varying vec3 vNormal;
 void main()

@@ -9,7 +9,7 @@ varying vec3 vNormal;
 void main()
 {
 	vVertex			= mMatrix * vec4( gl_Vertex );
-	vNormal			= gl_Normal;//normalize( vec3( mMatrix * vec4( gl_Normal, 0.0 ) ) );
+	vNormal			= gl_Normal;
 	
 	eyeDir			= normalize( eyePos - vVertex.xyz );
 	

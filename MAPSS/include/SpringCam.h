@@ -49,8 +49,6 @@ class SpringCam {
 		ci::Vec3f mPos, mVel, mAcc;
 	};
 	
-	
-	
 	SpringCam();
 	SpringCam( float camDist, float aspectRatio );
 	void apply( float timeDelta );

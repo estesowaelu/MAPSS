@@ -11,7 +11,7 @@ void main()
 {
 	vVertex			= vec4( gl_Vertex );
 	
-	vNormal			= gl_Normal;//normalize( vec3( mMatrix * vec4( gl_Normal, 0.0 ) ) );
+	vNormal			= gl_Normal;
 	
 	vEyeDir			= normalize( eyePos - vVertex.xyz );
 	

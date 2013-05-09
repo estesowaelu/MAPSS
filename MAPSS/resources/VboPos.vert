@@ -29,7 +29,7 @@ void main()
 						   vec4( 0.0, 0.0, 0.0, 1.0 ) );
 	
 	
-	vec4 vTest		= m * vec4( vVertex.xyz, 0.0 ); //  * pow( mainPower, 0.05 )
+	vec4 vTest		= m * vec4( vVertex.xyz, 0.0 );
 	vec4 nTest		= m * vec4( vNormal, 0.0 );
 	
 	vNormal			= nTest.xyz;	

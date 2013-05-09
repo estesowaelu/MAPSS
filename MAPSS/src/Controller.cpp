@@ -23,7 +23,6 @@ Controller::Controller( Room *room, int maxLanterns ) {
 }
 
 void Controller::update() {
-	// LANTERNS
 	for( std::vector<Lantern>::iterator it = mLanterns.begin(); it != mLanterns.end(); ){
 		if( it->mIsDead ){
 			it = mLanterns.erase( it );
@@ -35,7 +34,6 @@ void Controller::update() {
 
 	mNumLanterns = mLanterns.size();
 
-	// SORT LANTERNS
 	sort( mLanterns.begin(), mLanterns.end(), depthSortFunc );
 }
 

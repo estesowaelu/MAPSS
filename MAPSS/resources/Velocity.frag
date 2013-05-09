@@ -35,9 +35,7 @@ void reactToLanterns( inout vec3 acc, vec3 _myPos )
 		
 		// IF WITHIN THE ZONE, REACT TO THE LANTERN
 		if( distToLanternSqrd > minRad && distToLanternSqrd < maxRad ){
-//            if ( jkdlsaf )  // if blah, move towards, else move away
                 acc -= normalize( dirToLantern ) * ( ( maxRad - minRad ) / distToLanternSqrd ) * 0.01075 * dt;
-//            else acc += normalize( dirToLantern ) * ( ( maxRad - minRad ) / distToLanternSqrd ) * 0.01075 * dt;
 		}
 		
 		// IF TOO CLOSE, MOVE AWAY MORE RAPIDLY
@@ -73,8 +71,6 @@ void reactToPredators( inout vec3 acc, inout float crowded, vec3 fishPos )
 	}
 }
 
-
-
 void main()
 {	
 	// REALTIME MAC LAPTOP
@@ -84,16 +80,7 @@ void main()
 	float maxThresh		 = 0.90;
 	float maxSpeed		 = 4.1;
 	float crowdMulti	 = 0.4;
-	
-	// LARGE POPULATION RENDERS
-//	float zoneRadius	 = 15.0;
-//	float zoneRadiusSqrd = zoneRadius * zoneRadius;
-//	float minThresh		 = 0.44;
-//	float maxThresh		 = 0.90;
-//	float maxSpeed		 = 4.1;
-//	float crowdMulti	 = 0.4;
-	
-	
+		
 	vec4 vPos			= texture2D( positionTex, gl_TexCoord[0].st );
 	vec3 myPos			= vPos.xyz;
 	float leadership	= vPos.a;
@@ -109,12 +96,10 @@ void main()
 	int myY				= int( gl_TexCoord[0].t * float(fboDim) );
 	float crowded		= 2.0;
 	
-	
 	// APPLY THE ATTRACTIVE, ALIGNING, AND REPULSIVE FORCES
 	for( int y=0; y<fboDim; y++ ){
 		for( int x=0; x<fboDim; x++ ){
 			if( x == myX && y == myY ){
-				// Avoid comparing my sphere against my sphere
 			} else {
 				vec2 tc			= vec2( float(x), float(y) ) * invFboDim + offset;
 				vec4 pos		= texture2D( positionTex, tc );
@@ -134,7 +119,7 @@ void main()
 						float F  = ( minThresh/percent - 1.0 );
 						acc		+= dirNorm * F * 0.1 * dt * leadership;
 						
-						// IF FISH IS IN THE SWEET SPOT, ALIGN	
+                    // IF FISH IS IN THE SWEET SPOT, ALIGN
 					} else if( percent < maxThresh ){
 						float threshDelta		= maxThresh - minThresh;
 						float adjustedPercent	= ( percent - minThresh )/( threshDelta + 0.0000001 );
@@ -142,7 +127,7 @@ void main()
 						
 						acc += normalize( texture2D( velocityTex, tc ).xyz ) * F * 0.1 * dt * leadership;
 						
-						// IF FISH IS FAR, BUT WITHIN THE ACCEPTABLE ZONE, ATTRACT	
+                    // IF FISH IS FAR, BUT WITHIN THE ACCEPTABLE ZONE, ATTRACT
 					} else if( dist < zoneRadius ){
 						
 						float threshDelta		= 1.0 - maxThresh;
@@ -163,9 +148,7 @@ void main()
 	
 	
 	myCrowd -= ( myCrowd - crowded ) * ( 0.1 * dt );
-	
-	// MODULATE MYCROWD MULTIPLIER AND GRAVITY FOR INTERESTING DERIVATIONS
-	
+		
 	myVel += acc * dt;
 	float newMaxSpeed = maxSpeed + myCrowd * 0.03;			// CROWDING MAKES EM FASTER
 	
@@ -173,23 +156,16 @@ void main()
 	if( velLength > newMaxSpeed ){							// SPEED LIMIT FOR FAST
 		myVel = normalize( myVel ) * newMaxSpeed;
 	}
-	
-	
-	// MAIN GRAVITY TO MAKE THEM FALL
-	//	myVel += vec3( 0.0, -0.0025, 0.0 );
-	
-	
+		
 	vec3 tempNewPos		= myPos + myVel * dt;		// NEXT POSITION
 	
 	// AVOID WALLS
-	//if( power > 0.5 ){
 	float xPull	= tempNewPos.x/( roomBounds.x );
 	float yPull	= tempNewPos.y/( roomBounds.y );
 	float zPull	= tempNewPos.z/( roomBounds.z );
 	myVel -= vec3( xPull * xPull * xPull * xPull * xPull, 
 				  yPull * yPull * yPull * yPull * yPull, 
 				  zPull * zPull * zPull * zPull * zPull ) * 0.1;
-	//}
 	
 	bool hitWall = false;
 	vec3 wallNormal = vec3( 0.0 );
@@ -219,12 +195,10 @@ void main()
 		wallNormal += vec3( 0.0, 0.0,-1.0 );
 	}
 	
-	// WARNING, THIS MAY BE FAULTY MATH. MIGHT EXPLAIN LOST PARTICLES
 	if( hitWall ){
 		vec3 reflect = 2.0 * wallNormal * ( wallNormal * myVel );
 		myVel -= reflect * 0.65;
-	}
-	
+	}	
 	
 	gl_FragColor.rgb	= myVel;
 	gl_FragColor.a		= myCrowd;

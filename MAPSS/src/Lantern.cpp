@@ -22,7 +22,7 @@ Lantern::Lantern( const Vec3f &pos, Color col, int vid ) {
     mColor      = col;
 	mIsDead		= false;
 	mIsDying	= false;
-    deathTimer  = 1800;
+    deathTimer  = 1400;
     vID         = vid;
 	
 	mVisiblePer	= 1.0f;

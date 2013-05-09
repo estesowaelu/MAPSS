@@ -13,7 +13,6 @@ varying vec3 eyeDir;
 varying vec4 vVertex;
 varying vec3 vNormal;
 
-// http://imdoingitwrong.wordpress.com/2011/01/31/light-attenuation/
 vec3 PointLight( vec3 vertex, vec3 normal, vec3 eyeDirN, vec3 lightCenter, float lightRadius, vec3 color, float cutoff )
 {
     vec3 lightDir	= lightCenter - vertex;
@@ -21,22 +20,14 @@ vec3 PointLight( vec3 vertex, vec3 normal, vec3 eyeDirN, vec3 lightCenter, float
 	distance *= distance;
     float d			= max( distance - lightRadius, 0.0 );
     lightDir		/= distance;
-	//    vec3 HV			= normalize( normalize( lightDir ) + eyeDirN );
 	
-    // calculate basic attenuation
     float denom = d/lightRadius + 1.0;
-//	float denom = d + 1.0;
     float attenuation = 1.0 / ( denom*denom );
     
-    // scale and bias attenuation such that:
-    //   attenuation == 0 at extent of max influence
-    //   attenuation == 1 when d == 0
     attenuation		= ( attenuation - cutoff ) / ( 1.0 - cutoff );
     attenuation		= max( attenuation, 0.0 );
     
     float diff		= max( dot( lightDir, normal ), 0.0 );
-	//	float NdotHV	= max( dot( normal, HV ), 0.0 );
-	//	float spec		= pow( NdotHV, 131.0 );
     return color * diff * 3.0 * attenuation;// + spec ;
 }
 
@@ -71,6 +62,5 @@ void main()
 	vec3 darkRoomColor	= vec3( aoDark + baitLighting );
 	
 	gl_FragColor.rgb	= mix( litRoomColor, darkRoomColor, power );
-//	gl_FragColor.rgb	= texture2D( lightsTex, gl_TexCoord[0].st ).rgb;
 	gl_FragColor.a		= 1.0;
 }
