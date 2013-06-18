@@ -3,7 +3,7 @@ MAPSS
 
 ##Multi-Agent Psychological Sandbox Simulator
 
-In-progress undergraduate thesis project.
+Undergraduate thesis project.
 
 An artwork inspired by an amalgamation of ideas:
 
@@ -12,13 +12,6 @@ An artwork inspired by an amalgamation of ideas:
 - Evolutionary algorithms
 - Emergence
 - Self-organization
-
-* * *
-
-###Goals
-
-- discretely deformable, paintable dynamic terrain
-- unique, intelligent, evolving agents
 
 * * *
 
